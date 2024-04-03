@@ -1,11 +1,11 @@
 AC_PREREQ(2.60)
-AC_INIT([Csystem],
+AC_INIT([Cnetworking],
 	[1.0],
-	[tymothe.billerey@gmail.com],
+	[tymothe.billerey@oteria.fr],
 	[Csystem],
 	[https://lse.epita.fr/])
 
-AC_CONFIG_SRCDIR([src/example.c])
+AC_CONFIG_SRCDIR([src/protopeach.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([
 		  foreign

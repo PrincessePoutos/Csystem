@@ -2,6 +2,7 @@
 *.m4
 *.in
 configure
+configure~
 *.status
 criterion_tests*
 *.cache
