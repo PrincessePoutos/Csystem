@@ -1,0 +1,62 @@
+Objectif: Realiser un client et un serveur implementant le protocole "protopeach"
+
+RFC protopeach
+1/ Generalities: The protopeach protocol is a protocol for exchanging fruit through the Internet.
+2/ Method:
+2.1/
+helo: The client MUST send a helo string when connecting to server.
+The "helo" method SHOULD be followed by client FQDN. Ex: helo myname.mydomain
+The server MUST answer: "HELO OK" if it is able to handle the connection, otherwise, il return "HELO NOK"
+Ex:
+client: helo myname.mydomain
+server: hwlo OK
+The server MUST return "helo NOK 90" if it refuse the connection from client
+
+2.2/
+sendfruit: The client have the ability to send a fruit to the server.
+The string sent by client MUST contains the fruit name and number of fruits sent.
+Ex:
+client: sendfruit cranberry 12 <Will send 12 cranberries to server>.
+The server MUST answer: "sendfruit OK" if it is able to stock the fruits, otherwise it return "sendfruit NOK <errorcode>" (See errorcode section).
+If a fruit already exists, the sendfruit method will erase the number of available fruits from server.
+
+2.3/
+recvfruit: The client MUST send a fruit name following the method recvfruit and it will receive the number of available fruits.
+Ex:
+client: recvfruit banana
+server: recvfruit OK <numberoffruits> The server MUST return the number of avaiable fruits asked by client.
+If there is no more fruit available, the server MUST return the error code 21
+
+2.4/
+chngfruit: The client MUST send a fruit name following the method chngfruit. This method allow the client to change a fruit name.
+The server MUST answer the method state (OK/NOK) followed by the name of the changed fruit (if OK) or the error code (if NOK)
+Ex:
+client: chngfruit banana blackberry
+server: chngfruit OK blackberry
+
+2.5/
+howmany: The client can ask to the server how many fruits can be handled by server. The server MUST answer the number of available slots.
+The server MUST answer the method state (OK/NOK) followed by the number of fruits (if OK) or the error code (if NOK)
+Ex:
+Client : howmany
+Server : howmane OK 21
+Means that the server can get 21 more fruits.
+
+2.6/
+The Server MUST offer the ability to send and receive the following list of fruits, but is free to implement other fruits:
+- peach
+- mango
+- kiwi
+- watermelon
+- tomato
+- ananas
+
+3/
+Errorcodes:
+This section defines the error code that the server can send. If the client receive an error code, it SHOULD prompt the following error message.
+51: too much fruits, the server can't get more fruits
+69: fruit not available
+00: unknown error
+42: can't get the number of fruits
+21: no more of this fruit
+90: the server refused your helo
