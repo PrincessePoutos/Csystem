@@ -15,3 +15,6 @@ stamp-h1
 config.h
 CnetworkingClient
 CnetworkingServer
+.gdb_history
+config.h.in~
+peda-session-criterion_tests_server.txt

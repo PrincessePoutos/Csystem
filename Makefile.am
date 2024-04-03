@@ -9,16 +9,17 @@ TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
 
 check_PROGRAMS = criterion_tests_client criterion_tests_server
 
-criterion_tests_client_SOURCES = tests/client.c $(CnetworkingClient_SOURCES)
+criterion_tests_client_SOURCES = tests/client.c \
+																 ./src/protopeach.c \
+																 ./src/protopeach.h
 criterion_tests_client_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_client_LDFLAGS =  $(CRITERION_LIBS)
 
-criterion_tests_server_SOURCES = tests/server.c $(CnetworkingServer_SOURCES)
+criterion_tests_server_SOURCES = tests/server.c \
+																 ./src/protopeach.c \
+																 ./src/protopeach.h
 criterion_tests_server_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_server_LDFLAGS =  $(CRITERION_LIBS)
-
-
-criterion_tests_args = '--tap:-'
 
 TESTS = criterion_tests_client criterion_tests_server
 
