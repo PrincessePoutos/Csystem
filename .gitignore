@@ -1,0 +1,15 @@
+*.log
+*.m4
+*.in
+configure
+*.status
+criterion_tests*
+*.cache
+build-aux
+Csystem
+Makefile
+*.o
+.deps
+.dirstamp
+stamp-h1
+config.h

@@ -1,3 +1,20 @@
+# use the TAP log driver
+TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
+            $(top_srcdir)/build-aux/tap-driver.sh
+
+  # Setup Criterion TAP output using ENV
+# AM_TESTS_ENVIRONMENT = \
+#   CRITERION_OUTPUTS='tap:-'; \
+#   export CRITERION_OUTPUTS;
+
+check_PROGRAMS = criterion_tests
+
+criterion_tests_SOURCES = tests/simple.c
+criterion_tests_CFLAGS =  $(CRITERION_CFLAGS)
+criterion_tests_LDFLAGS =  $(CRITERION_LIBS)
+
+TESTS = criterion_tests
+
 EXTRA_DIST = autogen.sh
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 AM_MAKEFLAGS = --no-print-directory
@@ -6,24 +23,11 @@ AM_CPPFLAGS = \
 	      -include $(top_builddir)/config.h \
 	      -I${top_srcdir}/src
 
-AM_CFLAGS = $(WARN_CFLAGS) $(PTHREAD_FLAGS) $(OPENSSL_INCLUDES) $(CURL_FLAGS)
+AM_CFLAGS = $(WARN_CFLAGS)
 AM_LDFLAGS = $(WARN_LDFLAGS)
 
-bin_PROGRAMS = example
+bin_PROGRAMS = Csystem
 
-example_SOURCES = \
-		  src/example.c \
-		  src/thread.c \
-		  src/thread.h
+Csystem_SOURCES = src/example.c
 
-example_LDADD = $(PTHREAD_LIBS) $(OPENSSL_LDFLAGS) $(OPENSSL_LIBS) $(CURL_LIBS)
-
-TESTS = \
-	tests/test-args \
-	test-example
-
-EXTRA_DIST += tests/test-args
-
-check_PROGRAMS = test-example
-
-test_example_SOURCES = tests/test-example.c
+Csystem_LDADD = $(PTHREAD_LIBS) $(OPENSSL_LDFLAGS) $(OPENSSL_LIBS) $(CURL_LIBS)
