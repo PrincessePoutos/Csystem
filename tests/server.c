@@ -1,7 +1,6 @@
 #include "../src/protopeach.h"
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
-#include <stdio.h>
 
 Test (server, nameFruid)
 {
