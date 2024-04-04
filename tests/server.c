@@ -111,3 +111,14 @@ Test (server, subCountGrNumberNotChangeCounter)
 
   delFruit (f);
 }
+
+Test (server, subCountNagativeNumber)
+{
+  char fname[10] = "peach";
+  struct fruit *f = createFruit (fname, 6);
+  subCount (f, -10);
+
+  cr_assert_eq (getCountFruit (f), 6);
+
+  delFruit (f);
+}

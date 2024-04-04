@@ -40,7 +40,7 @@ int
 subCount (struct fruit *fruit, int subNumber)
 {
   fruit->count -= subNumber;
-  if (fruit->count < 0)
+  if (fruit->count < 0 || subNumber < 0)
   {
     fruit->count += subNumber;
     return -1;
