@@ -18,3 +18,4 @@ CnetworkingServer
 .gdb_history
 config.h.in~
 peda-session-criterion_tests_server.txt
+*.tar.gz
