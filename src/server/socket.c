@@ -11,13 +11,13 @@ openSocketServer (struct sockaddr_in serv_addr, int *sockfd)
   *sockfd = socket (AF_INET, SOCK_STREAM, 0);
   if (*sockfd < 0)
   {
-    printf ("impossible d'ouvrir le socket\n");
+    perror ("impossible d'ouvrir le socket\n");
     exit (-1);
   }
 
   if (bind (*sockfd, (struct sockaddr *)&serv_addr, sizeof (serv_addr)) < 0)
   {
-    printf ("impossible de faire le bind\n");
+    perror ("impossible de faire le bind\n");
     exit (-1);
   }
 }
