@@ -127,7 +127,7 @@ Test (serverSocker, initSocket)
   openSocketServer (*addr, s);
   cr_assert_geq (s, 0);
 
-  closeSocketServer (s);
+  closeSocket (s);
   free (addr);
   free (s);
 }
@@ -140,10 +140,29 @@ Test (serverSocker, acceptConnection)
 
   openSocketServer (*addr, s);
 
-  int sclient = acceptClientConnetion (s);
-  cr_assert_geq (sclient, 0);
+  int sClient = acceptClientConnetion (s);
+  cr_assert_geq (sClient, 0);
 
-  closeSocketServer (s);
+  closeSocket (&sClient);
+  closeSocket (s);
   free (addr);
   free (s);
+}
+
+Test (serverSocker, acceptConnectionTestCall)
+{
+  int *s = calloc (1, sizeof (int));
+  struct sockaddr_in *addr = calloc (1, sizeof (struct sockaddr));
+
+  openSocketServer (*addr, s);
+
+  int sClient = acceptClientConnetion (s);
+  cr_assert_geq (sClient, 0);
+  cr_assert_eq (accept_fake.call_count, 1);
+
+  closeSocket (&sClient);
+  closeSocket (s);
+  free (addr);
+  free (s);
+  RESET_FAKE (accept);
 }

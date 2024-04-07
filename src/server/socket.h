@@ -2,5 +2,5 @@
 #include <sys/socket.h>
 
 void openSocketServer (struct sockaddr_in serv_addr, int *sockfd);
-void closeSocketServer (int *sockfd);
+void closeSocket (int *sockfd);
 int acceptClientConnetion (int *sockfd);

@@ -2,6 +2,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/socket.h>
 #include <unistd.h>
 
 void
@@ -23,7 +24,7 @@ openSocketServer (struct sockaddr_in serv_addr, int *sockfd)
 }
 
 void
-closeSocketServer (int *sockfd)
+closeSocket (int *sockfd)
 {
   close (*sockfd);
 }
@@ -31,5 +32,5 @@ closeSocketServer (int *sockfd)
 int
 acceptClientConnetion (int *sockfd)
 {
-  return 10;
+  return accept (*sockfd, NULL, NULL);
 }
