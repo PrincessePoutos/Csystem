@@ -16,6 +16,8 @@ criterion_tests_client_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_client_LDFLAGS =  $(CRITERION_LIBS)
 
 criterion_tests_server_SOURCES = tests/server.c \
+																 ./src/server/socket.c \
+																 ./src/server/socket.h \
 																 ./src/protopeach.c \
 																 ./src/protopeach.h
 criterion_tests_server_CFLAGS =  $(CRITERION_CFLAGS)
@@ -37,11 +39,13 @@ AM_LDFLAGS = $(WARN_LDFLAGS)
 bin_PROGRAMS = CnetworkingClient CnetworkingServer
 
 CnetworkingClient_SOURCES = ./src/protopeach.c \
-									./src/protopeach.h \
-									./src/client/client.c
+														./src/protopeach.h \
+														./src/client/client.c
 
 CnetworkingServer_SOURCES = ./src/protopeach.c \
-									./src/protopeach.h \
-									./src/server/server.c
+													  ./src/server/socket.c \
+													  ./src/server/socket.h \
+														./src/protopeach.h \
+														./src/server/server.c
 
 # Cnetworking_LDADD = ''
