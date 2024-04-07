@@ -15,18 +15,15 @@ AM_INIT_AUTOMAKE([
       -Werror
 ])
 
-AC_PROG_CC_C99
-AC_PROG_CC_STDC
+AC_PROG_CC
 AC_PROG_AWK
 AC_USE_SYSTEM_EXTENSIONS
 
 AX_COMPILER_FLAGS
+AX_CHECK_COMPILE_FLAG([-fsanitize=address], [ASAN_FLAG="-fsanitize=address"])
+CFLAGS="$CFLAGS -std=c99 ${ASAN_FLAG}"
 
 AM_SILENT_RULES([yes])
-
-AC_PROG_CC_STDC
-
-CFLAGS="$CFLAGS -std=c99"
 
 PKG_CHECK_MODULES([CRITERION], [criterion], [], [
   AC_MSG_ERROR([unable to find Criterion])
