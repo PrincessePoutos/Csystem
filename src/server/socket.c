@@ -27,3 +27,9 @@ closeSocketServer (int *sockfd)
 {
   close (*sockfd);
 }
+
+int
+acceptClientConnetion (int *sockfd)
+{
+  return 10;
+}

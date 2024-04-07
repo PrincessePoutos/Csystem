@@ -2,6 +2,10 @@
 #include "protopeach.h"
 #include "server/socket.h"
 #include <criterion/criterion.h>
+#include <criterion/internal/assert.h>
+#include <criterion/internal/test.h>
+#include <stdlib.h>
+#include <sys/socket.h>
 
 DEFINE_FFF_GLOBALS;
 
@@ -124,5 +128,22 @@ Test (serverSocker, initSocket)
   cr_assert_geq (s, 0);
 
   closeSocketServer (s);
+  free (addr);
+  free (s);
+}
+
+FAKE_VALUE_FUNC3 (int, accept, int, __SOCKADDR_ARG, socklen_t *);
+Test (serverSocker, acceptConnection)
+{
+  int *s = calloc (1, sizeof (int));
+  struct sockaddr_in *addr = calloc (1, sizeof (struct sockaddr));
+
+  openSocketServer (*addr, s);
+
+  int sclient = acceptClientConnetion (s);
+  cr_assert_geq (sclient, 0);
+
+  closeSocketServer (s);
+  free (addr);
   free (s);
 }
