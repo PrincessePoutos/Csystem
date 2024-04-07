@@ -114,3 +114,15 @@ Test (server, subCountNagativeNumber)
 
   delFruit (f);
 }
+
+Test (serverSocker, initSocket)
+{
+  int *s = calloc (1, sizeof (int));
+  struct sockaddr_in *addr = calloc (1, sizeof (struct sockaddr_in));
+
+  openSocketServer (*addr, s);
+  cr_assert_geq (s, 0);
+
+  closeSocketServer (s);
+  free (s);
+}
