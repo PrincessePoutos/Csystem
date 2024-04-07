@@ -1,8 +1,4 @@
-struct fruit
-{
-  char name[10];
-  int count;
-};
+struct fruit;
 
 struct fruit *createFruit (char name[10], int count);
 void delFruit (struct fruit *);

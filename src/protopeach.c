@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct fruit
+{
+  char name[10];
+  int count;
+};
+
 struct fruit *
 createFruit (char fname[10], int fcount)
 {
