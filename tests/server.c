@@ -1,10 +1,13 @@
-#include "../src/protopeach.h"
+#include "fff.h"
+#include "protopeach.h"
+#include "server/socket.h"
 #include <criterion/criterion.h>
-#include <criterion/internal/assert.h>
 
+DEFINE_FFF_GLOBALS;
+
+char fname[10] = "peach";
 Test (server, nameFruid)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 3);
 
   cr_assert_str_eq (getNameFruit (f), "peach");
@@ -14,7 +17,6 @@ Test (server, nameFruid)
 
 Test (server, conuntFruit)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 9);
 
   cr_assert_eq (getCountFruit (f), 9);
@@ -24,7 +26,6 @@ Test (server, conuntFruit)
 
 Test (server, countFruitOtherValue)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 4);
 
   cr_assert_eq (getCountFruit (f), 4);
@@ -34,7 +35,6 @@ Test (server, countFruitOtherValue)
 
 Test (server, addCount)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 4);
   addCount (f, 2);
   cr_assert_eq (getCountFruit (f), 4 + 2);
@@ -44,7 +44,6 @@ Test (server, addCount)
 
 Test (server, addCountOtherValue)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 4);
   addCount (f, 4);
   cr_assert_eq (getCountFruit (f), 4 + 4);
@@ -54,7 +53,6 @@ Test (server, addCountOtherValue)
 
 Test (server, addCountNull)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 4);
   addCount (f, 0);
   cr_assert_eq (getCountFruit (f), 4);
@@ -64,7 +62,6 @@ Test (server, addCountNull)
 
 Test (server, subCount)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 4);
   subCount (f, 1);
   cr_assert_eq (getCountFruit (f), 4 - 1);
@@ -74,7 +71,6 @@ Test (server, subCount)
 
 Test (server, subCountOtherValue)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 6);
   subCount (f, 4);
   cr_assert_eq (getCountFruit (f), 6 - 4);
@@ -84,7 +80,6 @@ Test (server, subCountOtherValue)
 
 Test (server, subCountNull)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 6);
   subCount (f, 0);
   cr_assert_eq (getCountFruit (f), 6);
@@ -94,7 +89,6 @@ Test (server, subCountNull)
 
 Test (server, subCountGrNumber)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 6);
   cr_assert_eq (subCount (f, 10), -1);
 
@@ -103,7 +97,6 @@ Test (server, subCountGrNumber)
 
 Test (server, subCountGrNumberNotChangeCounter)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 6);
   subCount (f, 10);
 
@@ -114,7 +107,6 @@ Test (server, subCountGrNumberNotChangeCounter)
 
 Test (server, subCountNagativeNumber)
 {
-  char fname[10] = "peach";
   struct fruit *f = createFruit (fname, 6);
   subCount (f, -10);
 

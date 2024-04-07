@@ -1,5 +1,3 @@
-
-
 struct fruit
 {
   char name[10];
