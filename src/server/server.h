@@ -1,3 +1,6 @@
+#include <regex.h>
+#include <stdbool.h>
+#define BUFFER_SIZE 1024
 /*
 00: unknown error
 21: no more of this fruit
@@ -21,3 +24,6 @@ enum HeloResponse
   NOK = 0,
   OK = 1,
 };
+
+bool matchDomain (char *domain);
+void heloResponse (int *sClient, enum HeloResponse heloResponseChoise);

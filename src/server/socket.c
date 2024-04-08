@@ -21,6 +21,7 @@ openSocketServer (struct sockaddr_in serv_addr, int *sockfd)
     perror ("impossible de faire le bind\n");
     exit (-1);
   }
+  listen (*sockfd, 1);
 }
 
 void
