@@ -20,3 +20,4 @@ config.h.in~
 peda-session-criterion_tests_server.txt
 *.tar.gz
 compile_commands.json
+.clang-format
