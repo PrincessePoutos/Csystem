@@ -179,7 +179,7 @@ Test (serverSocker, receiveDataFromClient)
   int sClient = acceptClientConnetion (s);
   int bufferSize = 1024;
   char buffer[bufferSize];
-  receiveDataFromClient (s, buffer, bufferSize);
+  receiveDataFromClient (sClient, buffer, bufferSize);
   cr_assert_eq (recv_fake.call_count, 1);
 
   closeSocket (&sClient);
