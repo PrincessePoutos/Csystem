@@ -34,3 +34,9 @@ acceptClientConnetion (int *sockfd)
 {
   return accept (*sockfd, NULL, NULL);
 }
+
+void
+receiveDataFromClient (int *s, char *buffer, int bufferSize)
+{
+  recv (*s, buffer, bufferSize, 0);
+}
