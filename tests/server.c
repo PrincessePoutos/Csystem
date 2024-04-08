@@ -211,3 +211,24 @@ Test (serverSocker, sendDataToClient)
   RESET_FAKE (accept);
   RESET_FAKE (send);
 }
+
+Test (serverError, unknown) { cr_assert_eq (UNKNOWN, 0); }
+
+Test (serverError, noNumberFruitsAvailable)
+{
+  cr_assert_eq (NO_NUMBER_FRUITS_AVAILABLE, 21);
+}
+
+Test (serverError, numberNotFoumdOfFruits)
+{
+  cr_assert_eq (NUMBER_NOT_FOUND_OF_FRUITS, 42);
+}
+
+Test (serverError, tooMuchFruits) { cr_assert_eq (TOO_MUCH_FRUITS, 51); }
+
+Test (serverError, fruitsNotAvailable)
+{
+  cr_assert_eq (FRUITS_NOT_AVAILABLE, 69);
+}
+
+Test (serverError, serverRefuseHelo) { cr_assert_eq (SERVER_REFUSE_HELO, 90); }
