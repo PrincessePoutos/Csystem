@@ -21,7 +21,7 @@ AC_USE_SYSTEM_EXTENSIONS
 
 AX_COMPILER_FLAGS
 AX_CHECK_COMPILE_FLAG([-fsanitize=address], [ASAN_FLAG="-fsanitize=address"])
-CFLAGS="$CFLAGS -std=c99 ${ASAN_FLAG}"
+CFLAGS="$CFLAGS -std=c99 ${ASAN_FLAG} -Wno-error=declaration-after-statement -Wno-declaration-after-statement"
 
 AM_SILENT_RULES([yes])
 
