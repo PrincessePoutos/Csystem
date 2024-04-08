@@ -1,3 +1,4 @@
+#include "server/server.h"
 #include "fff.h"
 #include "protopeach.h"
 #include "server/socket.h"
