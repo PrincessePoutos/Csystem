@@ -40,3 +40,9 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
 {
   recv (s, buffer, bufferSize, 0);
 }
+
+void
+sendDataToClient (int s, const char *buffer, int bufferSize)
+{
+  send (s, buffer, bufferSize, 0);
+}

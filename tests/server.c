@@ -189,3 +189,25 @@ Test (serverSocker, receiveDataFromClient)
   RESET_FAKE (accept);
   RESET_FAKE (recv);
 }
+
+FAKE_VALUE_FUNC4 (ssize_t, send, int, const void *, size_t, int);
+Test (serverSocker, sendDataToClient)
+{
+  int *s = calloc (1, sizeof (int));
+  struct sockaddr_in *addr = calloc (1, sizeof (struct sockaddr));
+
+  openSocketServer (*addr, s);
+
+  int sClient = acceptClientConnetion (s);
+  int bufferSize = 1024;
+  char buffer[bufferSize];
+  sendDataToClient (sClient, buffer, bufferSize);
+  cr_assert_eq (send_fake.call_count, 1);
+
+  closeSocket (&sClient);
+  closeSocket (s);
+  free (addr);
+  free (s);
+  RESET_FAKE (accept);
+  RESET_FAKE (send);
+}
