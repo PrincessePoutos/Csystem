@@ -1,6 +1,5 @@
 #include "server/server.h"
 #include "server/socket.h"
-#include <regex.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,17 +9,7 @@
 bool
 matchDomain (char *domain)
 {
-  char pattern[] = "^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$";
-  regex_t regex;
-  int reti = regcomp (&regex, pattern, REG_EXTENDED);
-  if (reti)
-  {
-    perror ("Impossible de compiler le pattern regex\n");
-    exit (-1);
-  }
-
-  reti = regexec (&regex, domain, 0, NULL, 0);
-  return reti;
+  return true;
 }
 
 void
@@ -34,11 +23,14 @@ heloResponse (int *sClient, enum HeloResponse heloResponseChoise)
     strcat (buffer, " OK");
     break;
   case NOK:
-  default:
     strcat (buffer, " NOK");
     break;
+  default:
+    break;
   }
+  strcat (buffer, "\n");
   sendDataToClient (*sClient, buffer, sizeof (buffer));
+  free (buffer);
 }
 
 int
@@ -55,15 +47,18 @@ main (int argc, char *argv[])
   int *sClient = malloc (sizeof (int));
   *sClient = acceptClientConnetion (s);
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
-  while (1)
+  bool run = true;
+  while (run)
   {
+    memset (buffer, '\0', BUFFER_SIZE);
     receiveDataFromClient (*sClient, buffer, sizeof (buffer));
     if (buffer[0] == 'q')
     {
-      break;
+      run = false;
+      continue;
     }
     if (buffer[0] == 'h' && buffer[1] == 'e' && buffer[2] == 'l'
-        && buffer[3] == 'o' && buffer[4] == ' ' && matchDomain (buffer + 4))
+        && buffer[3] == 'o' && buffer[4] == ' ' && matchDomain (buffer + 5))
     {
       printf ("%s", buffer);
       heloResponse (sClient, OK);
@@ -72,13 +67,15 @@ main (int argc, char *argv[])
     {
       printf ("%s", buffer);
       heloResponse (sClient, NOK);
+      run = false;
+      continue;
     }
   }
-  closeSocket (sClient);
+  close (*sClient);
   free (sClient);
   free (buffer);
 
-  closeSocket (s);
+  close (*s);
   free (s);
   return 0;
 }

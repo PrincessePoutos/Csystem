@@ -2,6 +2,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
@@ -47,7 +48,35 @@ acceptClientConnetion (int *sockfd)
 void
 receiveDataFromClient (int s, char *buffer, int bufferSize)
 {
-  recv (s, buffer, bufferSize, MSG_WAITALL);
+  char *tmpBuffer = calloc (1, sizeof (char) * bufferSize);
+
+  if (tmpBuffer == NULL)
+  {
+    perror ("Erreur lors de l'allocation de mémoire pour tmpBuffer");
+    return;
+  }
+
+  ssize_t bytesRead;
+  do
+  {
+    bytesRead = recv (s, tmpBuffer, bufferSize, 0);
+    if (bytesRead < 0)
+    {
+      perror ("Erreur lors de la réception des données du client");
+      break;
+    }
+
+    strncat (buffer, tmpBuffer, bytesRead);
+
+    if (strchr (buffer, '\n') != NULL)
+    {
+      break;
+    }
+
+    memset (tmpBuffer, '\0', bufferSize);
+  } while (bytesRead > 0);
+
+  free (tmpBuffer);
 }
 
 void
