@@ -83,5 +83,18 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
 void
 sendDataToClient (int s, const char *buffer, int bufferSize)
 {
-  send (s, buffer, bufferSize, 0);
+  ssize_t totalSent = 0;
+  ssize_t bytesSent;
+
+  while (totalSent < bufferSize)
+  {
+    bytesSent = send (s, buffer + totalSent, bufferSize - totalSent, 0);
+    if (bytesSent == -1)
+    {
+      perror ("Erreur lors de l'envoi des données");
+      exit (-1);
+    }
+    totalSent += bytesSent;
+    printf ("%ld, %ld, %d", totalSent, bytesSent, bufferSize);
+  }
 }
