@@ -17,7 +17,7 @@ heloResponse (int *sClient, enum HeloResponse heloResponseChoise)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCode = malloc (sizeof (char) * 3);
-  strcpy (buffer, "#HELO");
+  strcpy (buffer, "HELO");
   switch (heloResponseChoise)
   {
   case OK:
@@ -26,16 +26,13 @@ heloResponse (int *sClient, enum HeloResponse heloResponseChoise)
   case NOK:
     strcat (buffer, " NOK ");
     sprintf (errorCode, "%d", SERVER_REFUSE_HELO);
-    printf ("%d\n", SERVER_REFUSE_HELO);
     strcat (buffer, errorCode);
     break;
   default:
     break;
   }
   free (errorCode);
-  strcat (buffer, "\n#");
-  // printf ("%s\n", buffer);
-  sendDataToClient (*sClient, buffer, sizeof (buffer));
+  sendDataToClient (*sClient, buffer, strlen (buffer));
   free (buffer);
 }
 

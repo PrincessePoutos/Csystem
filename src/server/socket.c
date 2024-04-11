@@ -95,6 +95,5 @@ sendDataToClient (int s, const char *buffer, int bufferSize)
       exit (-1);
     }
     totalSent += bytesSent;
-    printf ("%ld, %ld, %d", totalSent, bytesSent, bufferSize);
   }
 }
