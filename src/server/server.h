@@ -25,5 +25,10 @@ enum HeloResponse
   OK = 1,
 };
 
+struct state
+{
+  bool helo;
+};
+
 bool matchDomain (char *domain);
 void heloResponse (int *sClient, enum HeloResponse heloResponseChoise);
