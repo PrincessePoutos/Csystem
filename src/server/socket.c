@@ -10,14 +10,14 @@
 void
 openSocketServer (struct sockaddr_in serv_addr, int *sockfd)
 {
-
+  int opt;
   *sockfd = socket (AF_INET, SOCK_STREAM, 0);
   if (*sockfd < 0)
   {
     perror ("impossible d'ouvrir le socket\n");
     exit (-1);
   }
-  int opt = 1;
+  opt = 1;
   // Permettre la réutilisation de l'adresse du socket
   if (setsockopt (*sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt,
                   sizeof (opt)))
@@ -49,6 +49,7 @@ acceptClientConnetion (int *sockfd)
 void
 receiveDataFromClient (int s, char *buffer, int bufferSize)
 {
+  ssize_t bytesRead;
   char *tmpBuffer = calloc (1, sizeof (char) * bufferSize);
 
   if (tmpBuffer == NULL)
@@ -57,7 +58,6 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
     return;
   }
 
-  ssize_t bytesRead;
   do
   {
     bytesRead = recv (s, tmpBuffer, bufferSize, 0);

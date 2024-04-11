@@ -39,18 +39,21 @@ heloResponse (int *sClient, enum HeloResponse heloResponseChoise)
 int
 main (int argc, char *argv[])
 {
+  int *s, *sClient;
+  char *buffer;
+  bool run;
   struct sockaddr_in servAddr;
   servAddr.sin_family = AF_INET;
   servAddr.sin_port = htons (9001);
   servAddr.sin_addr.s_addr = INADDR_ANY;
 
-  int *s = malloc (sizeof (int));
+  s = malloc (sizeof (int));
   openSocketServer (servAddr, s);
 
-  int *sClient = malloc (sizeof (int));
+  sClient = malloc (sizeof (int));
   *sClient = acceptClientConnetion (s);
-  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
-  bool run = true;
+  buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  run = true;
   while (run)
   {
     memset (buffer, '\0', BUFFER_SIZE);
