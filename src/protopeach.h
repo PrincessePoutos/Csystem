@@ -1,6 +1,6 @@
 struct fruit;
 
-struct fruit *createFruit (char name[10], int count);
+struct fruit *createFruit (char *name, int count);
 void delFruit (struct fruit *);
 
 char *getNameFruit (struct fruit *fruit);

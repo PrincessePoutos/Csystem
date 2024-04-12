@@ -5,12 +5,12 @@
 
 struct fruit
 {
-  char name[10];
+  char name[20];
   int count;
 };
 
 struct fruit *
-createFruit (char fname[10], int fcount)
+createFruit (char *fname, int fcount)
 {
   struct fruit *res = (struct fruit *)malloc (sizeof (struct fruit));
   stpcpy (res->name, fname);

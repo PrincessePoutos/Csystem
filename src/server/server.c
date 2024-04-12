@@ -1,10 +1,38 @@
 #include "server/server.h"
+#include "protopeach.h"
 #include "server/socket.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+void
+initFruits (void)
+{
+  char *name = calloc (1, sizeof (char) * 20);
+
+  strcpy (name, "peach");
+  peach = createFruit (name, 0);
+
+  strcpy (name, "mango");
+  mango = createFruit (name, 0);
+
+  strcpy (name, "kiwi");
+  kiwi = createFruit (name, 0);
+
+  strcpy (name, "watermelon");
+  watermelon = createFruit (name, 0);
+
+  strcpy (name, "tomato");
+  tomato = createFruit (name, 0);
+
+  strcpy (name, "ananas");
+  ananas = createFruit (name, 0);
+
+  free (name);
+  return;
+}
 
 bool
 matchDomain (char *domain)
@@ -50,6 +78,8 @@ main (int argc, char *argv[])
 
   s = malloc (sizeof (int));
   openSocketServer (servAddr, s);
+
+  initFruits ();
 
   sClient = malloc (sizeof (int));
   *sClient = acceptClientConnetion (s);
