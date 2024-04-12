@@ -42,6 +42,7 @@ main (int argc, char *argv[])
   int *s, *sClient;
   char *buffer;
   bool run;
+  struct state state;
   struct sockaddr_in servAddr;
   servAddr.sin_family = AF_INET;
   servAddr.sin_port = htons (9001);
@@ -54,6 +55,8 @@ main (int argc, char *argv[])
   *sClient = acceptClientConnetion (s);
   buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   run = true;
+  state.helo = false;
+
   while (run)
   {
     memset (buffer, '\0', BUFFER_SIZE);
@@ -64,10 +67,21 @@ main (int argc, char *argv[])
       continue;
     }
     if (buffer[0] == 'h' && buffer[1] == 'e' && buffer[2] == 'l'
-        && buffer[3] == 'o' && buffer[4] == ' ' && matchDomain (buffer + 5))
+        && buffer[3] == 'o' && buffer[4] == ' ' && matchDomain (buffer + 5)
+        && !state.helo)
     {
       printf ("%s", buffer);
       heloResponse (sClient, OK);
+      state.helo = true;
+    }
+    else if (buffer[0] == 'h' && buffer[1] == 'e' && buffer[2] == 'l'
+             && buffer[3] == 'o' && buffer[4] == ' '
+             && matchDomain (buffer + 5) && state.helo)
+    {
+      printf ("%s", buffer);
+      heloResponse (sClient, NOK);
+      run = false;
+      continue;
     }
     else
     {
