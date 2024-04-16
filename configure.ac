@@ -3,7 +3,7 @@ AC_INIT([Cnetworking],
 	[1.0],
 	[tymothe.billerey@oteria.fr],
 	[Csystem],
-	[https://lse.epita.fr/])
+	[https://github.com/Neptunium931/Csystem])
 
 AC_CONFIG_SRCDIR([src/protopeach.c])
 AC_CONFIG_AUX_DIR([build-aux])
