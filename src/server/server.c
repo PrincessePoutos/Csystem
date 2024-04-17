@@ -84,7 +84,7 @@ main (int argc, char *argv[])
 {
   int *s, *sClient;
   char *buffer, *copyBuffer;
-  char *rest;
+  char *rest, *token;
   bool run;
   struct state state;
   struct sockaddr_in servAddr;
@@ -116,15 +116,15 @@ main (int argc, char *argv[])
 #define HELO_MAGIC "helo"
     copyBuffer = strdup (buffer);
     rest = copyBuffer;
-    if (!state.helo && matchString (strsep (&rest, " "), (char *)HELO_MAGIC)
+    token = strsep (&rest, " ");
+    if (!state.helo && matchString (token, (char *)HELO_MAGIC)
         && matchDomain (rest))
     {
       printf ("1%s", buffer);
       heloResponse (sClient, OK);
       state.helo = true;
     }
-    else if (state.helo
-             && matchString (strsep (&rest, " "), (char *)HELO_MAGIC)
+    else if (state.helo && matchString (token, (char *)HELO_MAGIC)
              && matchDomain (rest))
     {
       printf ("2%s", buffer);
@@ -133,9 +133,11 @@ main (int argc, char *argv[])
       free (copyBuffer);
       continue;
     }
-    // else if (state.helo &&)
-    // {
-    // }
+#define SEND_MAGIC "sendfruit"
+    else if (state.helo && matchString (token, (char *)SEND_MAGIC))
+    {
+      printf ("%s,%s", token, rest);
+    }
     else
     {
       printf ("3%s", buffer);
