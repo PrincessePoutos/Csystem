@@ -30,6 +30,9 @@ def initServer():
 
 
 class client:
+    def __init__(self) -> None:
+        self.initSocket()
+
     def initSocket(self, serverAddr: str = "localhost", serverPort: int = 9001):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((serverAddr, serverPort))
@@ -38,8 +41,11 @@ class client:
         self.s.close()
 
     def sendCommand(self, data: str):
-        self.s.sendall(data.encode())
+        self.s.sendall(data.encode() + b"\n")
         return self.s.recv(2048).decode()
+
+    def helo(self):
+        print("helo")
 
 
 def getTest(file: str):
@@ -48,29 +54,23 @@ def getTest(file: str):
     return data
 
 
-def no_helo():
-    print("no_helo")
-
-
-def helo():
-    print("helo")
-
-
 def main():
     arg = parseArgs()
 
     scopeList = getTest(arg.testFile)
     for scope in scopeList:
-        if arg.scopeList is not None:  # or scope["scope"]["name"] not in arg.scopeList:
-            perror("not in scope")
-            sys.exit(1)
-
         for test in scope["scope"]["tests"]:
             test = test["test"]
-            globalsList = globals()
+            c = client()
             print(test)
-            if test["start"] in globalsList:
-                globalsList[test["start"]]()
+            try:
+                funcStart = getattr(c, test["start"])
+                funcStart()
+            except:
+                continue
+            finally:
+                out = c.sendCommand(test["in"])
+                print(out)
 
 
 if __name__ == "__main__":
