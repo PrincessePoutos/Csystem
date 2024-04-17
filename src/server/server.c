@@ -84,6 +84,7 @@ main (int argc, char *argv[])
 {
   int *s, *sClient;
   char *buffer, *copyBuffer;
+  char *rest;
   bool run;
   struct state state;
   struct sockaddr_in servAddr;
@@ -102,35 +103,34 @@ main (int argc, char *argv[])
   run = true;
   state.helo = false;
 
-  copyBuffer = calloc (1, BUFFER_SIZE);
+  // copyBuffer = calloc (1, BUFFER_SIZE);
   while (run)
   {
     memset (buffer, '\0', BUFFER_SIZE);
-    memset (copyBuffer, '\0', BUFFER_SIZE);
     receiveDataFromClient (*sClient, buffer, sizeof (buffer));
     if (buffer[0] == 'q')
     {
       run = false;
       continue;
     }
-#define HELO "helo"
-    printf ("%ld\n", malloc_usable_size (buffer));
-    printf ("%s,%s\n", strsep (&copyBuffer, "o"), (char *)HELO);
-    // printf ("%s,%s\n", matchString (strsep (&copyBuffer, " "), (char
-    // *)HELO));
-    if (!state.helo && matchDomain (copyBuffer))
+#define HELO_MAGIC "helo"
+    copyBuffer = strdup (buffer);
+    rest = copyBuffer;
+    if (!state.helo && matchString (strsep (&rest, " "), (char *)HELO_MAGIC)
+        && matchDomain (rest))
     {
       printf ("1%s", buffer);
       heloResponse (sClient, OK);
       state.helo = true;
     }
-    else if (state.helo && buffer[0] == 'h' && buffer[1] == 'e'
-             && buffer[2] == 'l' && buffer[3] == 'o' && buffer[4] == ' '
-             && matchDomain (buffer + 5))
+    else if (state.helo
+             && matchString (strsep (&rest, " "), (char *)HELO_MAGIC)
+             && matchDomain (rest))
     {
       printf ("2%s", buffer);
       heloResponse (sClient, NOK);
       run = false;
+      free (copyBuffer);
       continue;
     }
     // else if (state.helo &&)
@@ -141,11 +141,12 @@ main (int argc, char *argv[])
       printf ("3%s", buffer);
       heloResponse (sClient, NOK);
       run = false;
+      free (copyBuffer);
       continue;
     }
+    free (copyBuffer);
   }
   free (buffer);
-  free (copyBuffer);
 
   close (*sClient);
   free (sClient);
