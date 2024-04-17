@@ -22,3 +22,4 @@ peda-session-criterion_tests_server.txt
 compile_commands.json
 .clang-format
 tags
+venv

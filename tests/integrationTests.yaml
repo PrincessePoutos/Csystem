@@ -1,0 +1,15 @@
+---
+- scope:
+    name: server
+    tests:
+      - test:
+          name: test helo 
+          start: no_helo
+          in: helo sd
+          out: HELO OK
+      - test:
+          name: test helo
+          start: helo
+          in: helo sd
+          out: HELO NOK
+
