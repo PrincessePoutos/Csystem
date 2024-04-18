@@ -14,6 +14,6 @@
           out: HELO NOK 90
       - test:
           name: send fruit not helo
-          start: no_helo
+          start: helo
           in: sendfruit
           out: "00"

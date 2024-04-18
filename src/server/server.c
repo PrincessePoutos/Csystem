@@ -145,10 +145,18 @@ main (int argc, char *argv[])
     {
       printf ("%s,%s", token, rest);
     }
-    else
+    else if (state.helo)
     {
       printf ("%s", buffer);
       unknownResponse (sClient);
+      run = false;
+      free (copyBuffer);
+      continue;
+    }
+    else
+    {
+      printf ("%s", buffer);
+      heloResponse (sClient, NOK);
       run = false;
       free (copyBuffer);
       continue;
