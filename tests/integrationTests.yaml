@@ -3,12 +3,12 @@
     name: server
     tests:
       - test:
-          name: test helo 
+          name: helo
           start: no_helo
           in: helo sd
           out: HELO OK
       - test:
-          name: test helo
+          name: helo after helo
           start: helo
           in: helo sd
           out: HELO NOK 90

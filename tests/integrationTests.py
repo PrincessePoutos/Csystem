@@ -78,6 +78,7 @@ def getTest(file: str):
 
 
 def main():
+    returnCode: int = 0
     arg = parseArgs()
 
     scopeList = getTest(arg.testFile)
@@ -86,7 +87,7 @@ def main():
             test = test["test"]
             initServer()
 
-            time.sleep(0.00000001)
+            time.sleep(0.1)
             c = client()
             try:
                 funcStart = getattr(c, test["start"])
@@ -99,11 +100,13 @@ def main():
                     testSuccess(test["name"])
                 else:
                     testFail(test["name"], out, test["out"])
+                    returnCode = -1
 
                 try:
                     c.closeSocket()
                 except:
                     continue
+    sys.exit(returnCode)
 
 
 if __name__ == "__main__":
