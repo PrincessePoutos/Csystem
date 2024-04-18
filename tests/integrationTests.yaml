@@ -11,5 +11,4 @@
           name: test helo
           start: helo
           in: helo sd
-          out: HELO NOK
-
+          out: HELO NOK 90

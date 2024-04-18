@@ -1,13 +1,36 @@
 #!/bin/env python3
+from re import split
 import subprocess as sp
+import time
 import socket
 import yaml
 import argparse
 import sys
+from termcolor import cprint
+import difflib
 
 
-def perror(message: str):
+def perror(message: str) -> None:
     print(f"{message}", file=sys.stderr)
+
+
+def testFail(testName: str, outFail: str, out: str) -> None:
+    cprint("NOK", "red", end=" ")
+    print(f"{testName} : ")
+    print(out)
+    print(outFail)
+    diff = difflib.unified_diff(
+        out.splitlines(keepends=True),
+        outFail.splitlines(keepends=True),
+        fromfile="ref",
+        tofile="testExcution",
+    )
+    perror("\n".join(diff))
+
+
+def testSuccess(testName: str) -> None:
+    cprint("OK", "green", end=" ")
+    print(f"{testName}")
 
 
 def parseArgs():
@@ -38,6 +61,7 @@ class client:
         self.s.connect((serverAddr, serverPort))
 
     def closeSocket(self):
+        self.sendCommand("q")
         self.s.close()
 
     def sendCommand(self, data: str):
@@ -45,7 +69,7 @@ class client:
         return self.s.recv(2048).decode()
 
     def helo(self):
-        print("helo")
+        self.sendCommand("helo sd.fr")
 
 
 def getTest(file: str):
@@ -61,16 +85,26 @@ def main():
     for scope in scopeList:
         for test in scope["scope"]["tests"]:
             test = test["test"]
+            initServer()
+
+            time.sleep(0.5)
             c = client()
-            print(test)
             try:
                 funcStart = getattr(c, test["start"])
                 funcStart()
             except:
                 continue
             finally:
-                out = c.sendCommand(test["in"])
-                print(out)
+                out: str = c.sendCommand(test["in"])
+                if out == test["out"]:
+                    testSuccess(test["name"])
+                else:
+                    testFail(test["name"], out, test["out"])
+
+                try:
+                    c.closeSocket()
+                except:
+                    continue
 
 
 if __name__ == "__main__":
