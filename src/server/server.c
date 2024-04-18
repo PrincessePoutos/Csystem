@@ -84,7 +84,7 @@ unknownResponse (int *sClient)
 {
   char *buffer = calloc (1, sizeof (char) * 3);
   sprintf (buffer, "%02d", UNKNOWN);
-  sendDataToClient (*sClient, buffer, BUFFER_SIZE);
+  sendDataToClient (*sClient, buffer, 3);
 }
 
 int

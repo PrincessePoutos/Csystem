@@ -65,7 +65,7 @@ class client:
 
     def sendCommand(self, data: str):
         self.s.sendall(data.encode() + b"\n")
-        return self.s.recv(2048).decode()
+        return self.s.recv(2048).decode().replace("\x00", "")
 
     def helo(self):
         self.sendCommand("helo sd.fr")
