@@ -35,3 +35,4 @@ bool matchDomain (char *domain);
 void heloResponse (int *sClient, enum HeloResponse heloResponseChoise);
 void initFruits (void);
 int matchString (char *s1, char *s2);
+void unknownResponse (int *sClient);

@@ -12,3 +12,8 @@
           start: helo
           in: helo sd
           out: HELO NOK 90
+      - test:
+          name: send fruit not helo
+          start: no_helo
+          in: sendfruit
+          out: "00"

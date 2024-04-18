@@ -79,6 +79,14 @@ heloResponse (int *sClient, enum HeloResponse heloResponseChoise)
   free (buffer);
 }
 
+void
+unknownResponse (int *sClient)
+{
+  char *buffer = calloc (1, sizeof (char) * 3);
+  sprintf (buffer, "%02d", UNKNOWN);
+  sendDataToClient (*sClient, buffer, BUFFER_SIZE);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -103,7 +111,6 @@ main (int argc, char *argv[])
   run = true;
   state.helo = false;
 
-  // copyBuffer = calloc (1, BUFFER_SIZE);
   while (run)
   {
     memset (buffer, '\0', BUFFER_SIZE);
@@ -120,14 +127,14 @@ main (int argc, char *argv[])
     if (!state.helo && matchString (token, (char *)HELO_MAGIC)
         && matchDomain (rest))
     {
-      printf ("1%s", buffer);
+      printf ("%s", buffer);
       heloResponse (sClient, OK);
       state.helo = true;
     }
     else if (state.helo && matchString (token, (char *)HELO_MAGIC)
              && matchDomain (rest))
     {
-      printf ("2%s", buffer);
+      printf ("%s", buffer);
       heloResponse (sClient, NOK);
       run = false;
       free (copyBuffer);
@@ -140,8 +147,8 @@ main (int argc, char *argv[])
     }
     else
     {
-      printf ("3%s", buffer);
-      heloResponse (sClient, NOK);
+      printf ("%s", buffer);
+      unknownResponse (sClient);
       run = false;
       free (copyBuffer);
       continue;
