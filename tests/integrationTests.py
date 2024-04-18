@@ -1,5 +1,4 @@
-#!/bin/env python3
-from re import split
+#!./venv/bin/python3
 import subprocess as sp
 import time
 import socket
@@ -48,7 +47,7 @@ def parseArgs():
     return parser.parse_args()
 
 
-def initServer():
+def initServer() -> None:
     sp.Popen("./CnetworkingServer", stdout=sp.PIPE, stderr=sp.PIPE, stdin=sp.PIPE)
 
 
@@ -87,7 +86,7 @@ def main():
             test = test["test"]
             initServer()
 
-            time.sleep(0.5)
+            time.sleep(0.00000001)
             c = client()
             try:
                 funcStart = getattr(c, test["start"])

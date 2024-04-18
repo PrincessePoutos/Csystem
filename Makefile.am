@@ -23,7 +23,7 @@ criterion_tests_server_SOURCES = tests/server.c \
 criterion_tests_server_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_server_LDFLAGS =  $(CRITERION_LIBS)
 
-TESTS = criterion_tests_client criterion_tests_server
+TESTS = criterion_tests_client criterion_tests_server tests/integrationTests.py
 
 EXTRA_DIST = autogen.sh 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
