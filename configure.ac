@@ -2,7 +2,7 @@ AC_PREREQ(2.60)
 AC_INIT([Cnetworking],
 	[1.0],
 	[tymothe.billerey@oteria.fr],
-	[Csystem],
+	[Cnetworking],
 	[https://github.com/Neptunium931/Csystem])
 
 AC_CONFIG_SRCDIR([src/protopeach.c])
