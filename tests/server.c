@@ -12,7 +12,7 @@
 DEFINE_FFF_GLOBALS;
 
 char fname[10] = "peach";
-Test (server, nameFruid)
+Test (fuitGestion, nameFruid)
 {
   struct fruit *f = createFruit (fname, 3);
 
@@ -21,7 +21,7 @@ Test (server, nameFruid)
   delFruit (f);
 }
 
-Test (server, conuntFruit)
+Test (fuitGestion, conuntFruit)
 {
   struct fruit *f = createFruit (fname, 9);
 
@@ -30,7 +30,7 @@ Test (server, conuntFruit)
   delFruit (f);
 }
 
-Test (server, countFruitOtherValue)
+Test (fuitGestion, countFruitOtherValue)
 {
   struct fruit *f = createFruit (fname, 4);
 
@@ -39,7 +39,7 @@ Test (server, countFruitOtherValue)
   delFruit (f);
 }
 
-Test (server, addCount)
+Test (fuitGestion, addCount)
 {
   struct fruit *f = createFruit (fname, 4);
   addCount (f, 2);
@@ -48,7 +48,7 @@ Test (server, addCount)
   delFruit (f);
 }
 
-Test (server, addCountOtherValue)
+Test (fuitGestion, addCountOtherValue)
 {
   struct fruit *f = createFruit (fname, 4);
   addCount (f, 4);
@@ -57,7 +57,7 @@ Test (server, addCountOtherValue)
   delFruit (f);
 }
 
-Test (server, addCountNull)
+Test (fuitGestion, addCountNull)
 {
   struct fruit *f = createFruit (fname, 4);
   addCount (f, 0);
@@ -66,7 +66,7 @@ Test (server, addCountNull)
   delFruit (f);
 }
 
-Test (server, subCount)
+Test (fuitGestion, subCount)
 {
   struct fruit *f = createFruit (fname, 4);
   subCount (f, 1);
@@ -75,7 +75,7 @@ Test (server, subCount)
   delFruit (f);
 }
 
-Test (server, subCountOtherValue)
+Test (fuitGestion, subCountOtherValue)
 {
   struct fruit *f = createFruit (fname, 6);
   subCount (f, 4);
@@ -84,7 +84,7 @@ Test (server, subCountOtherValue)
   delFruit (f);
 }
 
-Test (server, subCountNull)
+Test (fuitGestion, subCountNull)
 {
   struct fruit *f = createFruit (fname, 6);
   subCount (f, 0);
@@ -93,7 +93,7 @@ Test (server, subCountNull)
   delFruit (f);
 }
 
-Test (server, subCountGrNumber)
+Test (fuitGestion, subCountGrNumber)
 {
   struct fruit *f = createFruit (fname, 6);
   cr_assert_eq (subCount (f, 10), -1);
@@ -101,7 +101,7 @@ Test (server, subCountGrNumber)
   delFruit (f);
 }
 
-Test (server, subCountGrNumberNotChangeCounter)
+Test (fuitGestion, subCountGrNumberNotChangeCounter)
 {
   struct fruit *f = createFruit (fname, 6);
   subCount (f, 10);
@@ -111,7 +111,7 @@ Test (server, subCountGrNumberNotChangeCounter)
   delFruit (f);
 }
 
-Test (server, subCountNagativeNumber)
+Test (fuitGestion, subCountNagativeNumber)
 {
   struct fruit *f = createFruit (fname, 6);
   subCount (f, -10);
