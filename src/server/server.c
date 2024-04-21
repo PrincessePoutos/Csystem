@@ -22,31 +22,32 @@ matchString (char *s1, char *s2)
               : (matchString (s1 + 1, s2 + 1)));
 }
 
-void
+struct fruit *
 initFruits (void)
 {
   char *name = calloc (1, sizeof (char) * 20);
+  struct fruit *fruits;
 
   strcpy (name, "peach");
-  peach = createFirstFruit (name, 0);
+  fruits = createFirstFruit (name, 0);
 
   strcpy (name, "mango");
-  mango = createFirstFruit (name, 0);
+  createFruit (name, 0, fruits);
 
   strcpy (name, "kiwi");
-  kiwi = createFirstFruit (name, 0);
+  createFruit (name, 0, fruits);
 
   strcpy (name, "watermelon");
-  watermelon = createFirstFruit (name, 0);
+  createFruit (name, 0, fruits);
 
   strcpy (name, "tomato");
-  tomato = createFirstFruit (name, 0);
+  createFruit (name, 0, fruits);
 
   strcpy (name, "ananas");
-  ananas = createFirstFruit (name, 0);
+  createFruit (name, 0, fruits);
 
   free (name);
-  return;
+  return fruits;
 }
 
 bool
@@ -112,19 +113,18 @@ void
 sendFuitProcess (int *sClient, char *buffer)
 {
   char *rest, *copyBuffer, *token;
+  // struct fruit *currentFruit;
   copyBuffer = strdup (buffer);
   rest = copyBuffer;
   token = strsep (&rest, " ");
   if (token == NULL || rest == NULL)
   {
     unknownResponse (sClient);
+    return;
   }
-#define PEACH "peach"
-  else if (matchString (token, (char *)PEACH))
-  {
-    addCount (peach, atoi (rest));
-    sendFruitResponce (sClient);
-  }
+  // while (expression)
+  // {
+  // }
 }
 
 int

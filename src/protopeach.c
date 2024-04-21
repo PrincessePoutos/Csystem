@@ -1,5 +1,6 @@
 #include "protopeach.h"
 #include <malloc.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -20,21 +21,34 @@ createFirstFruit (char *fname, int fcount)
   return res;
 }
 
-struct fruit *
-createFruit (char *name, int count, struct fruit *prevFruit)
+void
+createFruit (char *name, int count, struct fruit *headFruit)
 {
-  struct fruit *res = createFirstFruit (name, count);
-  if (prevFruit->nextFuit == NULL)
+  if (headFruit == NULL)
   {
-    prevFruit->nextFuit = res;
-    res->prevFuit = prevFruit;
+    return;
   }
-  return res;
+  while (headFruit->nextFuit != NULL)
+  {
+    headFruit = headFruit->nextFuit;
+  }
+  headFruit->nextFuit = createFirstFruit (name, count);
+  headFruit->nextFuit->prevFuit = headFruit;
 }
 
 void
 delFruit (struct fruit *f)
 {
+  if (f->nextFuit != NULL)
+  {
+    printf ("f->nextFuit %p\n", f->nextFuit);
+    f->prevFuit->nextFuit = f->nextFuit;
+  }
+  if (f->prevFuit != NULL)
+  {
+    printf ("f->prevFuit %p\n", f->prevFuit);
+    f->nextFuit->prevFuit = f->prevFuit;
+  }
   free (f);
 }
 

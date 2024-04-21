@@ -1,7 +1,7 @@
 struct fruit;
 
 struct fruit *createFirstFruit (char *name, int count);
-struct fruit *createFruit (char *name, int count, struct fruit *prevFruit);
+void createFruit (char *name, int count, struct fruit *headFruit);
 void delFruit (struct fruit *);
 
 char *getNameFruit (struct fruit *fruit);

@@ -30,10 +30,9 @@ struct state
   bool helo;
 };
 
-struct fruit *peach, *mango, *kiwi, *watermelon, *tomato, *ananas;
 bool matchDomain (char *domain);
 void heloResponse (int *sClient, enum response heloResponseChoise);
-void initFruits (void);
+struct fruit *initFruits (void);
 int matchString (char *s1, char *s2);
 void unknownResponse (int *sClient);
 void sendFruitResponceError (int *sClient, enum Errorcodes errorCode);
