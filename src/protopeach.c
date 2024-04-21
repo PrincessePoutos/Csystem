@@ -7,14 +7,28 @@ struct fruit
 {
   char name[20];
   int count;
+  struct fruit *nextFuit;
+  struct fruit *prevFuit;
 };
 
 struct fruit *
-createFruit (char *fname, int fcount)
+createFirstFruit (char *fname, int fcount)
 {
-  struct fruit *res = (struct fruit *)malloc (sizeof (struct fruit));
+  struct fruit *res = (struct fruit *)calloc (1, sizeof (struct fruit));
   stpcpy (res->name, fname);
   res->count = fcount;
+  return res;
+}
+
+struct fruit *
+createFruit (char *name, int count, struct fruit *prevFruit)
+{
+  struct fruit *res = createFirstFruit (name, count);
+  if (prevFruit->nextFuit == NULL)
+  {
+    prevFruit->nextFuit = res;
+    res->prevFuit = prevFruit;
+  }
   return res;
 }
 
@@ -34,6 +48,17 @@ int
 getCountFruit (struct fruit *fruit)
 {
   return fruit->count;
+}
+
+struct fruit *
+getNextFruit (struct fruit *fruit)
+{
+  return fruit->nextFuit;
+}
+struct fruit *
+getPrevFruit (struct fruit *fruit)
+{
+  return fruit->prevFuit;
 }
 
 void

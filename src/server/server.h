@@ -19,7 +19,7 @@ enum Errorcodes
   SERVER_REFUSE_HELO = 90,
 };
 
-enum HeloResponse
+enum response
 {
   NOK = 0,
   OK = 1,
@@ -32,8 +32,10 @@ struct state
 
 struct fruit *peach, *mango, *kiwi, *watermelon, *tomato, *ananas;
 bool matchDomain (char *domain);
-void heloResponse (int *sClient, enum HeloResponse heloResponseChoise);
+void heloResponse (int *sClient, enum response heloResponseChoise);
 void initFruits (void);
 int matchString (char *s1, char *s2);
 void unknownResponse (int *sClient);
+void sendFruitResponceError (int *sClient, enum Errorcodes errorCode);
 void sendFruitResponce (int *sClient);
+void sendFuitProcess (int *sClient, char *rest);

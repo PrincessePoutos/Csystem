@@ -57,6 +57,7 @@ class client:
 
     def initSocket(self, serverAddr: str = "localhost", serverPort: int = 9001):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.settimeout(1.5)
         self.s.connect((serverAddr, serverPort))
 
     def closeSocket(self):

@@ -14,7 +14,7 @@ DEFINE_FFF_GLOBALS;
 char fname[10] = "peach";
 Test (fruitGestion, nameFruid)
 {
-  struct fruit *f = createFruit (fname, 3);
+  struct fruit *f = createFirstFruit (fname, 3);
 
   cr_assert_str_eq (getNameFruit (f), "peach");
 
@@ -23,7 +23,7 @@ Test (fruitGestion, nameFruid)
 
 Test (fruitGestion, conuntFruit)
 {
-  struct fruit *f = createFruit (fname, 9);
+  struct fruit *f = createFirstFruit (fname, 9);
 
   cr_assert_eq (getCountFruit (f), 9);
 
@@ -32,7 +32,7 @@ Test (fruitGestion, conuntFruit)
 
 Test (fruitGestion, countFruitOtherValue)
 {
-  struct fruit *f = createFruit (fname, 4);
+  struct fruit *f = createFirstFruit (fname, 4);
 
   cr_assert_eq (getCountFruit (f), 4);
 
@@ -41,7 +41,7 @@ Test (fruitGestion, countFruitOtherValue)
 
 Test (fruitGestion, addCount)
 {
-  struct fruit *f = createFruit (fname, 4);
+  struct fruit *f = createFirstFruit (fname, 4);
   addCount (f, 2);
   cr_assert_eq (getCountFruit (f), 4 + 2);
 
@@ -50,7 +50,7 @@ Test (fruitGestion, addCount)
 
 Test (fruitGestion, addCountOtherValue)
 {
-  struct fruit *f = createFruit (fname, 4);
+  struct fruit *f = createFirstFruit (fname, 4);
   addCount (f, 4);
   cr_assert_eq (getCountFruit (f), 4 + 4);
 
@@ -59,7 +59,7 @@ Test (fruitGestion, addCountOtherValue)
 
 Test (fruitGestion, addCountNull)
 {
-  struct fruit *f = createFruit (fname, 4);
+  struct fruit *f = createFirstFruit (fname, 4);
   addCount (f, 0);
   cr_assert_eq (getCountFruit (f), 4);
 
@@ -68,7 +68,7 @@ Test (fruitGestion, addCountNull)
 
 Test (fruitGestion, subCount)
 {
-  struct fruit *f = createFruit (fname, 4);
+  struct fruit *f = createFirstFruit (fname, 4);
   subCount (f, 1);
   cr_assert_eq (getCountFruit (f), 4 - 1);
 
@@ -77,7 +77,7 @@ Test (fruitGestion, subCount)
 
 Test (fruitGestion, subCountOtherValue)
 {
-  struct fruit *f = createFruit (fname, 6);
+  struct fruit *f = createFirstFruit (fname, 6);
   subCount (f, 4);
   cr_assert_eq (getCountFruit (f), 6 - 4);
 
@@ -86,7 +86,7 @@ Test (fruitGestion, subCountOtherValue)
 
 Test (fruitGestion, subCountNull)
 {
-  struct fruit *f = createFruit (fname, 6);
+  struct fruit *f = createFirstFruit (fname, 6);
   subCount (f, 0);
   cr_assert_eq (getCountFruit (f), 6);
 
@@ -95,7 +95,7 @@ Test (fruitGestion, subCountNull)
 
 Test (fruitGestion, subCountGrNumber)
 {
-  struct fruit *f = createFruit (fname, 6);
+  struct fruit *f = createFirstFruit (fname, 6);
   cr_assert_eq (subCount (f, 10), -1);
 
   delFruit (f);
@@ -103,7 +103,7 @@ Test (fruitGestion, subCountGrNumber)
 
 Test (fruitGestion, subCountGrNumberNotChangeCounter)
 {
-  struct fruit *f = createFruit (fname, 6);
+  struct fruit *f = createFirstFruit (fname, 6);
   subCount (f, 10);
 
   cr_assert_eq (getCountFruit (f), 6);
@@ -113,12 +113,23 @@ Test (fruitGestion, subCountGrNumberNotChangeCounter)
 
 Test (fruitGestion, subCountNagativeNumber)
 {
-  struct fruit *f = createFruit (fname, 6);
+  struct fruit *f = createFirstFruit (fname, 6);
   subCount (f, -10);
 
   cr_assert_eq (getCountFruit (f), 6);
 
   delFruit (f);
+}
+
+Test (fruitGestion, createMultipleFruit)
+{
+  struct fruit *f1;
+  struct fruit *f2;
+  f1 = createFirstFruit (fname, 6);
+  f2 = createFruit ("mango", 4, f1);
+
+  cr_assert_eq (getNextFruit (f1), f2);
+  cr_assert_eq (getPrevFruit (f2), f1);
 }
 
 Test (serverSocker, initSocket)

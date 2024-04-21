@@ -13,7 +13,12 @@
           in: helo sd
           out: HELO NOK 90
       - test:
-          name: send fruit not helo
+          name: send fruit command not valid
           start: helo
           in: sendfruit
           out: "00"
+      - test:
+          name: send 1 peach
+          start: helo
+          in: sendfruit peach 1
+          out: "sendfruit OK"

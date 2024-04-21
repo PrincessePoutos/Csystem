@@ -28,22 +28,22 @@ initFruits (void)
   char *name = calloc (1, sizeof (char) * 20);
 
   strcpy (name, "peach");
-  peach = createFruit (name, 0);
+  peach = createFirstFruit (name, 0);
 
   strcpy (name, "mango");
-  mango = createFruit (name, 0);
+  mango = createFirstFruit (name, 0);
 
   strcpy (name, "kiwi");
-  kiwi = createFruit (name, 0);
+  kiwi = createFirstFruit (name, 0);
 
   strcpy (name, "watermelon");
-  watermelon = createFruit (name, 0);
+  watermelon = createFirstFruit (name, 0);
 
   strcpy (name, "tomato");
-  tomato = createFruit (name, 0);
+  tomato = createFirstFruit (name, 0);
 
   strcpy (name, "ananas");
-  ananas = createFruit (name, 0);
+  ananas = createFirstFruit (name, 0);
 
   free (name);
   return;
@@ -56,7 +56,7 @@ matchDomain (char *domain)
 }
 
 void
-heloResponse (int *sClient, enum HeloResponse heloResponseChoise)
+heloResponse (int *sClient, enum response heloResponseChoise)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCode = malloc (sizeof (char) * 3);
@@ -85,6 +85,46 @@ unknownResponse (int *sClient)
   char *buffer = calloc (1, sizeof (char) * 3);
   sprintf (buffer, "%02d", UNKNOWN);
   sendDataToClient (*sClient, buffer, 3);
+}
+
+void
+sendFruitResponceError (int *sClient, enum Errorcodes errorCode)
+{
+  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  char *errorCodeBuffer = malloc (sizeof (char) * 3);
+  strcpy (buffer, "sendfruit NOK ");
+  sprintf (errorCodeBuffer, "%02d", errorCode);
+  sendDataToClient (*sClient, buffer, strlen (buffer));
+  free (buffer);
+  free (errorCodeBuffer);
+}
+void
+sendFruitResponce (int *sClient)
+{
+  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  strcpy (buffer, "sendfruit");
+  strcat (buffer, " OK");
+  sendDataToClient (*sClient, buffer, strlen (buffer));
+  free (buffer);
+}
+
+void
+sendFuitProcess (int *sClient, char *buffer)
+{
+  char *rest, *copyBuffer, *token;
+  copyBuffer = strdup (buffer);
+  rest = copyBuffer;
+  token = strsep (&rest, " ");
+  if (token == NULL || rest == NULL)
+  {
+    unknownResponse (sClient);
+  }
+#define PEACH "peach"
+  else if (matchString (token, (char *)PEACH))
+  {
+    addCount (peach, atoi (rest));
+    sendFruitResponce (sClient);
+  }
 }
 
 int
@@ -143,7 +183,7 @@ main (int argc, char *argv[])
 #define SEND_MAGIC "sendfruit"
     else if (state.helo && matchString (token, (char *)SEND_MAGIC))
     {
-      printf ("%s,%s", token, rest);
+      sendFuitProcess (sClient, rest);
     }
     else if (state.helo)
     {
