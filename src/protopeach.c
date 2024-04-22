@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+static int maxFruit = 20;
 struct fruit
 {
   char name[20];

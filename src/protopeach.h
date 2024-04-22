@@ -2,7 +2,6 @@
 #define protopeach_H
 
 struct fruit;
-int maxFruit;
 
 struct fruit *createFirstFruit (char *name, int count);
 void createFruit (char *name, int count, struct fruit *headFruit);
