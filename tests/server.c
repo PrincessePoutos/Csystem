@@ -13,6 +13,7 @@
 DEFINE_FFF_GLOBALS;
 
 char fname[10] = "peach";
+maxFruit = 20;
 Test (fruitGestion, nameFruid)
 {
   struct fruit *f = createFirstFruit (fname, 3);

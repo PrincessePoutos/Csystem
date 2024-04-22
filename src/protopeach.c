@@ -98,10 +98,16 @@ getPrevFruit (struct fruit *fruit)
   return fruit->prevFuit;
 }
 
-void
+int
 addCount (struct fruit *fruit, int addNumber)
 {
   fruit->count += addNumber;
+  if (fruit->count > maxFruit)
+  {
+    fruit->count -= addNumber;
+    return -1;
+  }
+  return 0;
 }
 
 int

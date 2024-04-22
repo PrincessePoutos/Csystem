@@ -2,6 +2,7 @@
 #define protopeach_H
 
 struct fruit;
+int maxFruit;
 
 struct fruit *createFirstFruit (char *name, int count);
 void createFruit (char *name, int count, struct fruit *headFruit);
@@ -12,6 +13,6 @@ int getCountFruit (struct fruit *fruit);
 struct fruit *getNextFruit (struct fruit *fruit);
 struct fruit *getPrevFruit (struct fruit *fruit);
 
-void addCount (struct fruit *fruit, int addNumber);
+int addCount (struct fruit *fruit, int addNumber);
 int subCount (struct fruit *fruit, int subNumber);
 #endif /* end of include guard: protopeach_H */

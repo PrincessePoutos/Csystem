@@ -15,6 +15,7 @@ initFruits (void)
 {
   char *name = calloc (1, sizeof (char) * 20);
   struct fruit *fruits;
+  maxFruit = 20;
 
   strcpy (name, "peach");
   fruits = createFirstFruit (name, 0);
