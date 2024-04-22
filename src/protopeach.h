@@ -1,3 +1,6 @@
+#ifndef protopeach_H
+#define protopeach_H
+
 struct fruit;
 
 struct fruit *createFirstFruit (char *name, int count);
@@ -11,3 +14,4 @@ struct fruit *getPrevFruit (struct fruit *fruit);
 
 void addCount (struct fruit *fruit, int addNumber);
 int subCount (struct fruit *fruit, int subNumber);
+#endif /* end of include guard: protopeach_H */
