@@ -1,6 +1,7 @@
 #ifndef server_H
 #define server_H
 
+#include "protopeach.h"
 #include <regex.h>
 #include <stdbool.h>
 #define BUFFER_SIZE 1024
@@ -34,7 +35,6 @@ struct state
 };
 
 bool matchDomain (char *domain);
-struct fruit *initFruits (void);
 void sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits);
 
 #endif /* end of include guard: server_H */

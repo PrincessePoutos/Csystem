@@ -1,6 +1,7 @@
 #include "server/server.h"
 #include "protopeach.h"
 #include "server/findFruit.h"
+#include "server/init.h"
 #include "server/matchString.h"
 #include "server/responce.h"
 #include "server/socket.h"
@@ -10,35 +11,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-struct fruit *
-initFruits (void)
-{
-  char *name = calloc (1, sizeof (char) * 20);
-  struct fruit *fruits;
-  maxFruit = 20;
-
-  strcpy (name, "peach");
-  fruits = createFirstFruit (name, 0);
-
-  strcpy (name, "mango");
-  createFruit (name, 0, fruits);
-
-  strcpy (name, "kiwi");
-  createFruit (name, 0, fruits);
-
-  strcpy (name, "watermelon");
-  createFruit (name, 0, fruits);
-
-  strcpy (name, "tomato");
-  createFruit (name, 0, fruits);
-
-  strcpy (name, "ananas");
-  createFruit (name, 0, fruits);
-
-  free (name);
-  return fruits;
-}
 
 bool
 matchDomain (char *domain)
