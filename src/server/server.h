@@ -34,11 +34,7 @@ struct state
 };
 
 bool matchDomain (char *domain);
-void heloResponse (int *sClient, enum response heloResponseChoise);
 struct fruit *initFruits (void);
-void unknownResponse (int *sClient);
-void sendFruitResponceError (int *sClient, enum Errorcodes errorCode);
-void sendFruitResponce (int *sClient);
 void sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits);
 
 #endif /* end of include guard: server_H */

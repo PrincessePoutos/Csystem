@@ -23,7 +23,9 @@ criterion_tests_server_SOURCES = tests/server.c \
 																 ./src/server/findFruit.c \
 																 ./src/server/findFruit.h \
 																 ./src/server/matchString.c \
-																 ./src/server/matchString.h
+																 ./src/server/matchString.h \
+																 ./src/server/responce.c \
+																 ./src/server/responce.h
 criterion_tests_server_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_server_LDFLAGS =  $(CRITERION_LIBS)
 
@@ -54,6 +56,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/findFruit.c \
 														./src/server/findFruit.h \
 														./src/server/matchString.c \
-														./src/server/matchString.h
+														./src/server/matchString.h \
+														./src/server/responce.c \
+														./src/server/responce.h
 
 # Cnetworking_LDADD = ''
