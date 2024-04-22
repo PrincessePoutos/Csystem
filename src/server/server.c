@@ -1,5 +1,6 @@
 #include "server/server.h"
 #include "protopeach.h"
+#include "server/matchString.h"
 #include "server/socket.h"
 #include <malloc.h>
 #include <stdbool.h>
@@ -7,20 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-int
-matchString (char *s1, char *s2)
-{
-  return ((*s1 == 0 && *s2 == 0)                 ? (1)
-          : (*s1 != 0 && *s2 == 0)               ? (0)
-          : (*s1 == 0 && *s2 != 0 && *s2 != '*') ? (0)
-          : (*s1 == 0 && *s2 != 0 && *s2 == '*') ? (matchString (s1, s2 + 1))
-          : (*s1 != 0 && *s2 != 0 && *s2 == '*')
-              ? (matchString (s1, s2 + 1) || matchString (s1 + 1, s2))
-          : (*s1 != 0 && *s2 != 0 && *s2 != '*')
-              ? (*s1 != *s2) ? (0) : (matchString (s1 + 1, s2 + 1))
-              : (matchString (s1 + 1, s2 + 1)));
-}
 
 struct fruit *
 initFruits (void)
