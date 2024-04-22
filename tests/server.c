@@ -1,6 +1,7 @@
 #include "server/server.h"
 #include "fff.h"
 #include "protopeach.h"
+#include "server/findFruit.h"
 #include "server/socket.h"
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
@@ -243,3 +244,23 @@ Test (serverError, fruitsNotAvailable)
 }
 
 Test (serverError, serverRefuseHelo) { cr_assert_eq (SERVER_REFUSE_HELO, 90); }
+
+Test (serverUtils, findFruitByeName)
+{
+  struct fruit *fruits;
+  struct fruit *peach;
+  struct fruit *mango;
+  struct fruit *kiwi;
+  fruits = createFirstFruit (fname, 6);
+  createFruit ("mango", 4, fruits);
+
+  createFruit ("kiwi", 4, fruits);
+  peach = fruits;
+  mango = getNextFruit (peach);
+  kiwi = getNextFruit (mango);
+
+  cr_assert_eq (findFruit ("kiwi", fruits), kiwi);
+  delFruit (peach);
+  delFruit (mango);
+  delFruit (kiwi);
+}

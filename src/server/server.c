@@ -1,5 +1,6 @@
 #include "server/server.h"
 #include "protopeach.h"
+#include "server/findFruit.h"
 #include "server/matchString.h"
 #include "server/socket.h"
 #include <malloc.h>

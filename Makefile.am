@@ -20,6 +20,8 @@ criterion_tests_server_SOURCES = tests/server.c \
 																 ./src/server/socket.h \
 																 ./src/protopeach.c \
 																 ./src/protopeach.h \
+																 ./src/server/findFruit.c \
+																 ./src/server/findFruit.h \
 																 ./src/server/matchString.c \
 																 ./src/server/matchString.h
 criterion_tests_server_CFLAGS =  $(CRITERION_CFLAGS)
@@ -49,6 +51,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/socket.h \
 														./src/protopeach.h \
 														./src/server/server.c \
+														./src/server/findFruit.c \
+														./src/server/findFruit.h \
 														./src/server/matchString.c \
 														./src/server/matchString.h
 
