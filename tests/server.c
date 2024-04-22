@@ -5,7 +5,6 @@
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
 #include <criterion/internal/test.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -143,31 +142,12 @@ Test (fruitGestion, deleteMidleFruit)
   struct fruit *kiwi;
 
   peach = createFirstFruit (fname, 6);
-  printf ("peach %p\n", peach);
-  printf ("peach getNextFruit %p\n", getNextFruit (peach));
-  printf ("peach getPrevFruit %p\n", getPrevFruit (peach));
   createFruit ("mango", 4, peach);
   mango = getNextFruit (peach);
-  printf ("peach %p\n", peach);
-  printf ("peach getNextFruit %p\n", getNextFruit (peach));
-  printf ("peach getPrevFruit %p\n", getPrevFruit (peach));
-  printf ("mango %p\n", mango);
-  printf ("mango getNextFruit %p\n", getNextFruit (mango));
-  printf ("mango getPrevFruit %p\n", getPrevFruit (mango));
   createFruit ("kiwi", 2, peach);
   kiwi = getNextFruit (mango);
-  printf ("peach %p\n", peach);
-  printf ("peach getNextFruit %p\n", getNextFruit (peach));
-  printf ("peach getPrevFruit %p\n", getPrevFruit (peach));
-  printf ("mango %p\n", mango);
-  printf ("mango getNextFruit %p\n", getNextFruit (mango));
-  printf ("mango getPrevFruit %p\n", getPrevFruit (mango));
-  printf ("kiwi %p\n", kiwi);
-  printf ("kiwi getNextFruit %p\n", getNextFruit (kiwi));
-  printf ("kiwi getPrevFruit %p\n", getPrevFruit (kiwi));
 
   delFruit (mango);
-  printf ("getNextFruit %p\n", getNextFruit (peach));
 
   cr_assert_eq (getNextFruit (peach), kiwi);
   cr_assert_eq (getPrevFruit (kiwi), peach);

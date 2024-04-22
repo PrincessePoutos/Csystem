@@ -39,15 +39,38 @@ createFruit (char *name, int count, struct fruit *headFruit)
 void
 delFruit (struct fruit *f)
 {
-  if (f->nextFuit != NULL)
-  {
-    printf ("f->nextFuit %p\n", f->nextFuit);
-    f->prevFuit->nextFuit = f->nextFuit;
-  }
   if (f->prevFuit != NULL)
   {
-    printf ("f->prevFuit %p\n", f->prevFuit);
-    f->nextFuit->prevFuit = f->prevFuit;
+    // reassign the nextFuit value of the previous fruit if there is a fruit
+    // after
+    if (f->prevFuit->nextFuit != NULL)
+    {
+      f->prevFuit->nextFuit = f->nextFuit;
+    }
+  }
+  else
+  {
+    if (f->nextFuit != NULL)
+    {
+      f->nextFuit->prevFuit = NULL;
+    }
+  }
+
+  if (f->nextFuit != NULL)
+  {
+    // reassign the prevFuit value of the following fruit if there is a
+    // previous fruit
+    if (f->nextFuit->prevFuit != NULL)
+    {
+      f->nextFuit->prevFuit = f->prevFuit;
+    }
+  }
+  else
+  {
+    if (f->prevFuit != NULL)
+    {
+      f->prevFuit->nextFuit = NULL;
+    }
   }
   free (f);
 }
