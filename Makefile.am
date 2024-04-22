@@ -27,7 +27,9 @@ criterion_tests_server_SOURCES = tests/server.c \
 																 ./src/server/responce.c \
 																 ./src/server/responce.h \
 																 ./src/server/init.h \
-																 ./src/server/init.c
+																 ./src/server/init.c \
+																 ./src/server/sendFuitProcess.c \
+																 ./src/server/sendFuitProcess.h
 
 criterion_tests_server_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_server_LDFLAGS =  $(CRITERION_LIBS)
@@ -63,6 +65,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/responce.c \
 														./src/server/responce.h \
 														./src/server/init.h \
-														./src/server/init.c
+														./src/server/init.c \
+														./src/server/sendFuitProcess.c \
+														./src/server/sendFuitProcess.h
 
 # Cnetworking_LDADD = ''

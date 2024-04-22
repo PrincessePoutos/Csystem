@@ -1,9 +1,9 @@
 #include "server/server.h"
 #include "protopeach.h"
-#include "server/findFruit.h"
 #include "server/init.h"
 #include "server/matchString.h"
 #include "server/responce.h"
+#include "server/sendFuitProcess.h"
 #include "server/socket.h"
 #include <malloc.h>
 #include <stdbool.h>
@@ -16,35 +16,6 @@ bool
 matchDomain (char *domain)
 {
   return true;
-}
-
-void
-sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
-{
-  char *count, *copyBuffer, *name;
-  struct fruit *fruit;
-  copyBuffer = strdup (buffer);
-  count = copyBuffer;
-  name = strsep (&count, " ");
-  if (name == NULL || count == NULL)
-  {
-    unknownResponse (sClient);
-    return;
-  }
-  fruit = findFruit (name, fruits);
-  if (fruit == NULL)
-  {
-    sendFruitResponceError (sClient, FRUITS_NOT_AVAILABLE);
-    return;
-  }
-  if (!addCount (fruit, atoi (count)))
-  {
-    sendFruitResponce (sClient);
-  }
-  else
-  {
-    sendFruitResponceError (sClient, TOO_MUCH_FRUITS);
-  }
 }
 
 int
