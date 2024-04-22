@@ -84,6 +84,7 @@ sendFruitResponceError (int *sClient, enum Errorcodes errorCode)
   char *errorCodeBuffer = malloc (sizeof (char) * 3);
   strcpy (buffer, "sendfruit NOK ");
   sprintf (errorCodeBuffer, "%02d", errorCode);
+  strcat (buffer, errorCodeBuffer);
   sendDataToClient (*sClient, buffer, strlen (buffer));
   free (buffer);
   free (errorCodeBuffer);
@@ -99,21 +100,32 @@ sendFruitResponce (int *sClient)
 }
 
 void
-sendFuitProcess (int *sClient, char *buffer)
+sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
-  char *rest, *copyBuffer, *token;
-  // struct fruit *currentFruit;
+  char *count, *copyBuffer, *name;
+  struct fruit *fruit;
   copyBuffer = strdup (buffer);
-  rest = copyBuffer;
-  token = strsep (&rest, " ");
-  if (token == NULL || rest == NULL)
+  count = copyBuffer;
+  name = strsep (&count, " ");
+  if (name == NULL || count == NULL)
   {
     unknownResponse (sClient);
     return;
   }
-  // while (expression)
-  // {
-  // }
+  fruit = findFruit (name, fruits);
+  if (fruit == NULL)
+  {
+    sendFruitResponceError (sClient, FRUITS_NOT_AVAILABLE);
+    return;
+  }
+  if (!addCount (fruit, atoi (count)))
+  {
+    sendFruitResponce (sClient);
+  }
+  else
+  {
+    sendFruitResponceError (sClient, TOO_MUCH_FRUITS);
+  }
 }
 
 int
@@ -125,6 +137,7 @@ main (int argc, char *argv[])
   bool run;
   struct state state;
   struct sockaddr_in servAddr;
+  struct fruit *fruits;
   servAddr.sin_family = AF_INET;
   servAddr.sin_port = htons (9001);
   servAddr.sin_addr.s_addr = INADDR_ANY;
@@ -132,7 +145,7 @@ main (int argc, char *argv[])
   s = malloc (sizeof (int));
   openSocketServer (servAddr, s);
 
-  initFruits ();
+  fruits = initFruits ();
 
   sClient = malloc (sizeof (int));
   *sClient = acceptClientConnetion (s);
@@ -172,7 +185,7 @@ main (int argc, char *argv[])
 #define SEND_MAGIC "sendfruit"
     else if (state.helo && matchString (token, (char *)SEND_MAGIC))
     {
-      sendFuitProcess (sClient, rest);
+      sendFuitProcess (sClient, rest, fruits);
     }
     else if (state.helo)
     {

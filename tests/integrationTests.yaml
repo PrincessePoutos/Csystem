@@ -22,3 +22,18 @@
           start: helo
           in: sendfruit peach 1
           out: "sendfruit OK"
+      - test:
+          name: send 1 peach not helo
+          start: no_helo
+          in: sendfruit peach 1
+          out: "HELO NOK 90"
+      - test:
+          name: send fruit not available
+          start: helo
+          in: sendfruit fruit 1
+          out: "sendfruit NOK 69"
+      - test:
+          name: send too much fruits
+          start: helo
+          in: sendfruit peach 100
+          out: "sendfruit NOK 51"
