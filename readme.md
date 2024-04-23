@@ -4,7 +4,6 @@
 ## how to build
 ```sh
 ./autogen.sh
-./configure
 make
 ```
 

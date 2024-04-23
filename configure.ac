@@ -40,7 +40,7 @@ AC_REQUIRE_AUX_FILE([tap-driver.sh])
 AC_ARG_WITH([enable-erase],
     AS_HELP_STRING([--with-enable-erase],
                    [Enable erase sendFruit]),
-    [enable-erase=yes],
+    [enable_erase=yes],
     [enable_erase=no])
 
 # Set custom define based on the option
