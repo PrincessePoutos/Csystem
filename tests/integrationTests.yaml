@@ -1,39 +1,39 @@
 ---
 - scope:
-  name: server
-  tests:
-    - test:
-      name: helo
-      start: no_helo
-      in: helo sd
-      out: HELO OK
-    - test:
-      name: helo after helo
-      start: helo
-      in: helo sd
-      out: HELO NOK 90
-    - test:
-      name: send fruit command not valid
-      start: helo
-      in: sendfruit
-      out: "00"
-    - test:
-      name: send 1 peach
-      start: helo
-      in: sendfruit peach 1
-      out: "sendfruit OK"
-    - test:
-      name: send 1 peach not helo
-      start: no_helo
-      in: sendfruit peach 1
-      out: "HELO NOK 90"
-    - test:
-      name: send fruit not available
-      start: helo
-      in: sendfruit fruit 1
-      out: "sendfruit NOK 69"
-    - test:
-      name: send too much fruits
-      start: helo
-      in: sendfruit peach 100
-      out: "sendfruit NOK 51"
+    name: server
+    tests:
+      - test:
+          name: helo
+          start: no_helo
+          in: helo sd
+          out: HELO OK
+      - test:
+          name: helo after helo
+          start: helo
+          in: helo sd
+          out: HELO NOK 90
+      - test:
+          name: send fruit command not valid
+          start: helo
+          in: sendfruit
+          out: "00"
+      - test:
+          name: send 1 peach
+          start: helo
+          in: sendfruit peach 1
+          out: "sendfruit OK"
+      - test:
+          name: send 1 peach not helo
+          start: no_helo
+          in: sendfruit peach 1
+          out: "HELO NOK 90"
+      - test:
+          name: send fruit not available
+          start: helo
+          in: sendfruit fruit 1
+          out: "sendfruit NOK 69"
+      - test:
+          name: send too much fruits
+          start: helo
+          in: sendfruit peach 100
+          out: "sendfruit NOK 51"
