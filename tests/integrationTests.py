@@ -49,7 +49,7 @@ def parseArgs():
 
 
 def initServer() -> None:
-    sp.Popen("./CnetworkingServer", stdout=sp.PIPE, stderr=sp.PIPE, stdin=sp.PIPE)
+    sp.Popen("./CnetworkingServer", stdout=logFile, stderr=logFile)
 
 
 class client:
@@ -132,4 +132,6 @@ def main():
 
 
 if __name__ == "__main__":
+    logFile = open("integrationTests.log", "w")
     main()
+    logFile.close()

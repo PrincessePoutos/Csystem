@@ -14,12 +14,14 @@ sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
   if (name == NULL || count == NULL)
   {
     unknownResponse (sClient);
+    free (copyBuffer);
     return;
   }
   fruit = findFruit (name, fruits);
   if (fruit == NULL)
   {
     sendFruitResponceError (sClient, FRUITS_NOT_AVAILABLE);
+    free (copyBuffer);
     return;
   }
 #ifdef ENABLE_ERASE
@@ -35,4 +37,5 @@ sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
   {
     sendFruitResponceError (sClient, TOO_MUCH_FRUITS);
   }
+  free (copyBuffer);
 }

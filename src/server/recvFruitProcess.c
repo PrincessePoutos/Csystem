@@ -1,5 +1,6 @@
 #include "server/recvFruitProcess.h"
 #include "protopeach.h"
+#include <stdio.h>
 
 void
 recvFruitProcess (int *sClient, char *buffer, struct fruit *fruits)

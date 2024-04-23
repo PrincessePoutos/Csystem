@@ -43,7 +43,7 @@
       - test:
           name: recvFruit enable erase
           start: sendfruit 
-          in: recvFruit peach
+          in: recvfruit peach
           out: recvfruit OK 10
 - scope:
     name: server_disable_erase
@@ -51,5 +51,5 @@
       - test:
           name: recvFruit disable erase
           start: sendfruit 
-          in: recvFruit peach 5
+          in: recvfruit peach 5
           out: recvfruit OK 5

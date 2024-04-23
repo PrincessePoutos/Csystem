@@ -14,4 +14,6 @@ struct fruit *getPrevFruit (struct fruit *fruit);
 
 int addCount (struct fruit *fruit, int addNumber);
 int subCount (struct fruit *fruit, int subNumber);
+
+void setNameFruit (struct fruit *fruit, char *name);
 #endif /* end of include guard: protopeach_H */

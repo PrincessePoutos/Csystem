@@ -1,5 +1,7 @@
 #include "server/server.h"
 #include "protopeach.h"
+#include "server/changeFruitProcess.h"
+#include "server/clear.h"
 #include "server/init.h"
 #include "server/matchString.h"
 #include "server/recvFruitProcess.h"
@@ -102,7 +104,7 @@ main (int argc, char *argv[])
     free (copyBuffer);
   }
   free (buffer);
-
+  clearFruits (fruits);
   close (*sClient);
   free (sClient);
 

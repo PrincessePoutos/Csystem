@@ -17,7 +17,7 @@ struct fruit *
 createFirstFruit (char *fname, int fcount)
 {
   struct fruit *res = (struct fruit *)calloc (1, sizeof (struct fruit));
-  stpcpy (res->name, fname);
+  setNameFruit (res, fname);
   res->count = fcount;
   return res;
 }
@@ -121,4 +121,10 @@ subCount (struct fruit *fruit, int subNumber)
     return -1;
   }
   return 0;
+}
+
+void
+setNameFruit (struct fruit *fruit, char *name)
+{
+  stpcpy (fruit->name, name);
 }
