@@ -81,7 +81,7 @@ main (int argc, char *argv[])
       sendFuitProcess (sClient, rest, fruits);
     }
 #define RECV_MAGIC "recvfruit"
-    else if (state.helo && matchString (token, (char *)SEND_MAGIC))
+    else if (state.helo && matchString (token, (char *)RECV_MAGIC))
     {
       recvFruitProcess (sClient, rest, fruits);
     }

@@ -76,7 +76,8 @@ recvFruitResponce (int *sClient, int numberFruit)
   char *numberBuffer = malloc (sizeof (char) * 3);
   strcpy (buffer, "recvfruit");
   strcat (buffer, " OK ");
-  sprintf (numberBuffer, "%02d", numberFruit);
+  sprintf (numberBuffer, "%d", numberFruit);
+  strcat (buffer, numberBuffer);
   sendDataToClient (*sClient, buffer, strlen (buffer));
   free (buffer);
 }
