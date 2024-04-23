@@ -37,6 +37,11 @@
           start: helo
           in: sendfruit peach 100
           out: "sendfruit NOK 51"
+      - test:
+          name: change fruit
+          start: helo
+          in: chngfruit peach banana
+          out: "chngfruit OK banana"
 - scope:
     name: server_enable_erase
     tests:

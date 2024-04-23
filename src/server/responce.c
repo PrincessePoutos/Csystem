@@ -80,4 +80,29 @@ recvFruitResponce (int *sClient, int numberFruit)
   strcat (buffer, numberBuffer);
   sendDataToClient (*sClient, buffer, strlen (buffer));
   free (buffer);
+  free (numberBuffer);
+}
+
+void
+changeFruitResponceError (int *sClient, enum Errorcodes errorCode)
+{
+  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  char *errorCodeBuffer = malloc (sizeof (char) * 3);
+  strcpy (buffer, "chngfruit NOK ");
+  sprintf (errorCodeBuffer, "%02d", errorCode);
+  strcat (buffer, errorCodeBuffer);
+  sendDataToClient (*sClient, buffer, strlen (buffer));
+  free (buffer);
+  free (errorCodeBuffer);
+}
+void
+changeFruitResponce (int *sClient, char *newName)
+{
+  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  size_t newline_pos = strcspn (newName, "\n");
+  newName[newline_pos] = '\0';
+  strcpy (buffer, "chngfruit OK ");
+  strcat (buffer, newName);
+  sendDataToClient (*sClient, buffer, strlen (buffer));
+  free (buffer);
 }

@@ -17,8 +17,8 @@ def perror(message: str) -> None:
 def testFail(testName: str, outFail: str, out: str) -> None:
     cprint("NOK", "red", end=" ")
     print(f"{testName} : ")
-    print(out)
-    print(outFail)
+    print(out.encode())
+    print(outFail.encode())
     diff = difflib.unified_diff(
         out.splitlines(keepends=True),
         outFail.splitlines(keepends=True),

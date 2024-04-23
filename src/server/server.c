@@ -85,6 +85,11 @@ main (int argc, char *argv[])
     {
       recvFruitProcess (sClient, rest, fruits);
     }
+#define CHANGE_MAGIC "chngfruit"
+    else if (state.helo && matchString (token, (char *)CHANGE_MAGIC))
+    {
+      changeFruitProcess (sClient, rest, fruits);
+    }
     else if (state.helo)
     {
       printf ("%s", buffer);

@@ -35,4 +35,6 @@ void sendFruitResponceError (int *sClient, enum Errorcodes errorCode);
 void sendFruitResponce (int *sClient);
 void recvFruitResponceError (int *sClient, enum Errorcodes errorCode);
 void recvFruitResponce (int *sClient, int numberFruit);
+void changeFruitResponceError (int *sClient, enum Errorcodes errorCode);
+void changeFruitResponce (int *sClient, char *newName);
 #endif /* end of include guard: responce_H */

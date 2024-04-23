@@ -10,15 +10,21 @@ recvFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
   copyBuffer = strdup (buffer);
   count = copyBuffer;
   name = strsep (&count, " ");
+#ifdef ENABLE_ERASE
+  if (name == NULL || count != NULL)
+#else
   if (name == NULL || count == NULL)
+#endif /* ifdef ENABLE_ERASE */
   {
     unknownResponse (sClient);
+    free (copyBuffer);
     return;
   }
   fruit = findFruit (name, fruits);
   if (fruit == NULL)
   {
     sendFruitResponceError (sClient, FRUITS_NOT_AVAILABLE);
+    free (copyBuffer);
     return;
   }
 #ifdef ENABLE_ERASE
@@ -36,4 +42,5 @@ recvFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
   {
     recvFruitResponceError (sClient, TOO_MUCH_FRUITS);
   }
+  free (copyBuffer);
 }

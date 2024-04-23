@@ -70,6 +70,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/sendFuitProcess.h \
 														./src/server/recvFruitProcess.c \
 														./src/server/recvFruitProcess.h \
+														./src/server/changeFruitProcess.c \
+														./src/server/changeFruitProcess.h \
 														./src/server/clear.c \
 														./src/server/clear.h
 
