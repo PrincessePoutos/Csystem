@@ -77,6 +77,7 @@ main (int argc, char *argv[])
     {
       sendFuitProcess (sClient, rest, fruits);
     }
+#define RECV_MAGIC "recvfruit"
     else if (state.helo)
     {
       printf ("%s", buffer);

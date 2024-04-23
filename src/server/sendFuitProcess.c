@@ -3,6 +3,9 @@
 void
 sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
+#ifdef ENABLE_ERASE
+  int diffCount;
+#endif /* ifdef ENABLE_ERASE */
   char *count, *copyBuffer, *name;
   struct fruit *fruit;
   copyBuffer = strdup (buffer);
@@ -19,7 +22,12 @@ sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
     sendFruitResponceError (sClient, FRUITS_NOT_AVAILABLE);
     return;
   }
+#ifdef ENABLE_ERASE
+  diffCount = atoi (count) - getCountFruit (fruit);
+  if (!addCount (fruit, diffCount))
+#else
   if (!addCount (fruit, atoi (count)))
+#endif /* ifdef ENABLE_ERASE */
   {
     sendFruitResponce (sClient);
   }
