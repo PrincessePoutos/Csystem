@@ -7,6 +7,7 @@ import argparse
 import sys
 from termcolor import cprint
 import difflib
+import random
 
 
 def perror(message: str) -> None:
@@ -53,6 +54,7 @@ def initServer() -> None:
 
 class client:
     def __init__(self) -> None:
+        self.fruits = ["peach", "mango", "kiwi"]
         self.initSocket()
 
     def initSocket(self, serverAddr: str = "localhost", serverPort: int = 9001):
@@ -71,6 +73,11 @@ class client:
     def helo(self):
         self.sendCommand("helo sd.fr")
 
+    def sendfruit(self):
+        self.helo()
+        for fruit in self.fruits:
+            self.sendCommand(f"sendfruit {fruit} {random.randint(10,20)}")
+
 
 def getTest(file: str):
     with open(file) as f:
@@ -78,12 +85,26 @@ def getTest(file: str):
     return data
 
 
+def getEnableErase():
+    with open("./config.h") as f:
+        lines = f.readlines()
+    for line in lines:
+        if "#define ENABLE_ERASE 1" in line:
+            return True
+    return False
+
+
 def main():
     returnCode: int = 0
     arg = parseArgs()
 
     scopeList = getTest(arg.testFile)
+    enableErase = getEnableErase()
     for scope in scopeList:
+        if enableErase and scope["scope"]["name"] == "server_disable_erase":
+            continue
+        if not enableErase and scope["scope"]["name"] == "server_enable_erase":
+            continue
         for test in scope["scope"]["tests"]:
             test = test["test"]
             initServer()

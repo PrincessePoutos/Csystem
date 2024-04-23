@@ -33,4 +33,6 @@ void heloResponse (int *sClient, enum response heloResponseChoise);
 void unknownResponse (int *sClient);
 void sendFruitResponceError (int *sClient, enum Errorcodes errorCode);
 void sendFruitResponce (int *sClient);
+void recvFruitResponceError (int *sClient, enum Errorcodes errorCode);
+void recvFruitResponce (int *sClient, int numberFruit);
 #endif /* end of include guard: responce_H */

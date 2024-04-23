@@ -2,6 +2,7 @@
 #include "protopeach.h"
 #include "server/init.h"
 #include "server/matchString.h"
+#include "server/recvFruitProcess.h"
 #include "server/responce.h"
 #include "server/sendFuitProcess.h"
 #include "server/socket.h"
@@ -78,6 +79,10 @@ main (int argc, char *argv[])
       sendFuitProcess (sClient, rest, fruits);
     }
 #define RECV_MAGIC "recvfruit"
+    else if (state.helo && matchString (token, (char *)SEND_MAGIC))
+    {
+      recvFruitProcess (sClient, rest, fruits);
+    }
     else if (state.helo)
     {
       printf ("%s", buffer);

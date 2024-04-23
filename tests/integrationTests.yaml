@@ -37,3 +37,19 @@
           start: helo
           in: sendfruit peach 100
           out: "sendfruit NOK 51"
+- scope:
+    name: server_enable_erase
+    tests:
+      - test:
+          name: recvFruit enable erase
+          start: sendfruit 
+          in: recvFruit peach
+          out: recvfruit OK 10
+- scope:
+    name: server_disable_erase
+    tests:
+      - test:
+          name: recvFruit disable erase
+          start: sendfruit 
+          in: recvFruit peach 5
+          out: recvfruit OK 5

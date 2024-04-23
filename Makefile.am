@@ -67,6 +67,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/init.h \
 														./src/server/init.c \
 														./src/server/sendFuitProcess.c \
-														./src/server/sendFuitProcess.h
+														./src/server/sendFuitProcess.h \
+														./src/server/recvFruitProcess.c \
+														./src/server/recvFruitProcess.h
 
 # Cnetworking_LDADD = ''
