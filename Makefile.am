@@ -36,7 +36,9 @@ criterion_tests_server_LDFLAGS =  $(CRITERION_LIBS)
 
 TESTS = criterion_tests_client criterion_tests_server tests/integrationTests.py
 
-EXTRA_DIST = autogen.sh 
+EXTRA_DIST = autogen.sh \
+						 ./tests/integrationTests.py \
+						 ./tests/integrationTests.yaml
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 AM_MAKEFLAGS = --no-print-directory
 
