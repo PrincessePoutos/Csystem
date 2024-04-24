@@ -79,7 +79,7 @@
           name: recvFruit enable erase
           start: sendfruit 
           in: recvfruit peach
-          out: recvfruit OK 10
+          out: recvfruit OK 19
 - scope:
     name: server_disable_erase
     tests:

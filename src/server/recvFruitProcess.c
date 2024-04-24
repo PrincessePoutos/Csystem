@@ -5,15 +5,21 @@
 void
 recvFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
-  char *count, *copyBuffer, *name;
+  char *charCount, *copyBuffer, *name;
   struct fruit *fruit;
-  copyBuffer = strdup (buffer);
-  count = copyBuffer;
-  name = strsep (&count, " ");
 #ifdef ENABLE_ERASE
-  if (name == NULL || count != NULL)
+  int count;
+  size_t line_pos;
+#endif /* ifdef ENABLE_ERASE */
+  copyBuffer = strdup (buffer);
+  charCount = copyBuffer;
+  name = strsep (&charCount, " ");
+#ifdef ENABLE_ERASE
+  line_pos = strcspn (name, "\n");
+  name[line_pos] = '\0';
+  if (name == NULL || charCount != NULL)
 #else
-  if (name == NULL || count == NULL)
+  if (name == NULL || charCount == NULL)
 #endif /* ifdef ENABLE_ERASE */
   {
     unknownResponse (sClient);
@@ -28,14 +34,15 @@ recvFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
     return;
   }
 #ifdef ENABLE_ERASE
-  if (!subCount (fruit, getCountFruit (fruit)))
+  count = getCountFruit (fruit);
+  if (!subCount (fruit, count))
   {
-    recvFruitResponce (sClient, getCountFruit (fruit));
+    recvFruitResponce (sClient, count);
   }
 #else
-  if (!subCount (fruit, atoi (count)))
+  if (!subCount (fruit, atoi (charCount)))
   {
-    recvFruitResponce (sClient, atoi (count));
+    recvFruitResponce (sClient, atoi (charCount));
   }
 #endif /* ifdef ENABLE_ERASE */
   else
