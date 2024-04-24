@@ -29,6 +29,11 @@ PKG_CHECK_MODULES([CRITERION], [criterion], [], [
   AC_MSG_ERROR([unable to find Criterion])
 ])
 
+PKG_CHECK_MODULES([PCRE], [libpcre], [], [
+  AC_MSG_ERROR([unable to find libpcre])
+])
+
+
 AC_SUBST([CRITERION_CFLAGS])
 AC_SUBST([CRITERION_LIBS])
 

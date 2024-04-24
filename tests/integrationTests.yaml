@@ -5,12 +5,17 @@
       - test:
           name: helo
           start: no_helo
-          in: helo sd
+          in: helo helo.fr
           out: HELO OK
       - test:
           name: helo after helo
           start: helo
-          in: helo sd
+          in: helo helo.fr
+          out: HELO NOK 90
+      - test:
+          name: helo not valid fqdn
+          start: helo
+          in: helo helo.fr
           out: HELO NOK 90
       - test:
           name: send fruit command not valid

@@ -71,7 +71,7 @@ class client:
         return self.s.recv(2048).decode().replace("\x00", "")
 
     def helo(self):
-        self.sendCommand("helo sd.fr")
+        self.sendCommand("helo helo.fr")
 
     def sendfruit(self):
         self.helo()
