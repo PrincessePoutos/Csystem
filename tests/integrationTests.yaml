@@ -42,6 +42,16 @@
           start: helo
           in: chngfruit peach banana
           out: "chngfruit OK banana"
+      - test:
+          name: change fruit not new name
+          start: helo
+          in: chngfruit peach
+          out: "00"
+      - test:
+          name: change fruit not available
+          start: helo
+          in: chngfruit banana peach
+          out: "chngfruit NOK 69"
 - scope:
     name: server_enable_erase
     tests:
