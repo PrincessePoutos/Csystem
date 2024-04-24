@@ -75,7 +75,8 @@ class client:
 
     def sendfruit(self):
         self.helo()
-        for fruit in self.fruits:
+        self.sendCommand(f"sendfruit {self.fruits[0]} 19")
+        for fruit in self.fruits[1:]:
             self.sendCommand(f"sendfruit {fruit} {random.randint(10,20)}")
 
 

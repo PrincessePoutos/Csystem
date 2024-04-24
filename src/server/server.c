@@ -2,6 +2,7 @@
 #include "protopeach.h"
 #include "server/changeFruitProcess.h"
 #include "server/clear.h"
+#include "server/howmanyProcess.h"
 #include "server/init.h"
 #include "server/matchString.h"
 #include "server/recvFruitProcess.h"
@@ -89,6 +90,11 @@ main (int argc, char *argv[])
     else if (state.helo && matchString (token, (char *)CHANGE_MAGIC))
     {
       changeFruitProcess (sClient, rest, fruits);
+    }
+#define HOWMANY_MAGIC "howmany"
+    else if (state.helo && matchString (token, (char *)HOWMANY_MAGIC))
+    {
+      howmanyProcess (sClient, rest, fruits);
     }
     else if (state.helo)
     {

@@ -73,7 +73,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/changeFruitProcess.c \
 														./src/server/changeFruitProcess.h \
 														./src/server/clear.c \
-														./src/server/clear.h
-
+														./src/server/clear.h \
+														./src/server/howmanyProcess.c \
+														./src/server/howmanyProcess.h
 
 # Cnetworking_LDADD = ''

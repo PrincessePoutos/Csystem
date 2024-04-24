@@ -106,3 +106,28 @@ changeFruitResponce (int *sClient, char *newName)
   sendDataToClient (*sClient, buffer, strlen (buffer));
   free (buffer);
 }
+
+void
+howmanyResponceError (int *sClient, enum Errorcodes errorCode)
+{
+  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  char *errorCodeBuffer = malloc (sizeof (char) * 3);
+  strcpy (buffer, "howmany NOK ");
+  sprintf (errorCodeBuffer, "%02d", errorCode);
+  strcat (buffer, errorCodeBuffer);
+  sendDataToClient (*sClient, buffer, strlen (buffer));
+  free (buffer);
+  free (errorCodeBuffer);
+}
+void
+howmanyResponce (int *sClient, int count)
+{
+  char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
+  char *numberBuffer = malloc (sizeof (char) * 3);
+  strcpy (buffer, "howmany OK ");
+  sprintf (numberBuffer, "%d", count);
+  strcat (buffer, numberBuffer);
+  sendDataToClient (*sClient, buffer, strlen (buffer));
+  free (buffer);
+  free (numberBuffer);
+}

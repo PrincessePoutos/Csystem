@@ -52,6 +52,21 @@
           start: helo
           in: chngfruit banana peach
           out: "chngfruit NOK 69"
+      - test:
+          name: howmany not more
+          start: helo
+          in: howmany peach
+          out: "howmany NOK 21"
+      - test:
+          name: howmany peach
+          start: sendfruit
+          in: howmany peach
+          out: "howmany OK 19"
+      - test:
+          name: howmany not fruits available
+          start: sendfruit
+          in: howmany banana
+          out: "howmany NOK 69"
 - scope:
     name: server_enable_erase
     tests:
