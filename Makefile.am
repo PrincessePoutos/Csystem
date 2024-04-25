@@ -22,8 +22,8 @@ criterion_tests_server_SOURCES = tests/server.c \
 																 ./src/protopeach.h \
 																 ./src/server/findFruit.c \
 																 ./src/server/findFruit.h \
-																 ./src/server/matchString.c \
-																 ./src/server/matchString.h \
+																 ./src/matchString.c \
+																 ./src/matchString.h \
 																 ./src/server/responce.c \
 																 ./src/server/responce.h \
 																 ./src/server/init.h \
@@ -62,8 +62,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/server.c \
 														./src/server/findFruit.c \
 														./src/server/findFruit.h \
-														./src/server/matchString.c \
-														./src/server/matchString.h \
+														./src/matchString.c \
+														./src/matchString.h \
 														./src/server/responce.c \
 														./src/server/responce.h \
 														./src/server/init.h \

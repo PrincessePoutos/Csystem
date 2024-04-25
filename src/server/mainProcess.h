@@ -1,11 +1,11 @@
 #ifndef MAINPROCESS_H
 #define MAINPROCESS_H
 
+#include "matchString.h"
 #include "protopeach.h"
 #include "server/changeFruitProcess.h"
 #include "server/howmanyProcess.h"
 #include "server/matchDomain.h"
-#include "server/matchString.h"
 #include "server/recvFruitProcess.h"
 #include "server/responce.h"
 #include "server/sendFuitProcess.h"
