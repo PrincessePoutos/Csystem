@@ -53,7 +53,12 @@ bin_PROGRAMS = CnetworkingClient CnetworkingServer
 
 CnetworkingClient_SOURCES = ./src/protopeach.c \
 														./src/protopeach.h \
-														./src/client/client.c
+														./src/client/client.c \
+														./src/client/client.h \
+														./src/matchString.c \
+														./src/matchString.h
+
+CnetworkingClient_LDADD = $(READLINE_LIBS)
 
 CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/socket.c \

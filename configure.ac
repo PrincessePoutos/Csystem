@@ -33,6 +33,9 @@ PKG_CHECK_MODULES([PCRE], [libpcre], [], [
   AC_MSG_ERROR([unable to find libpcre])
 ])
 
+PKG_CHECK_MODULES([READLINE], [readline], [], [
+  AC_MSG_ERROR([unable to find readline])
+])
 AX_PTHREAD(
 	   [PTHREAD_LIBS="-lpthread"],
 	   AC_MSG_ERROR([$PACKAGE requires pthreads]))
