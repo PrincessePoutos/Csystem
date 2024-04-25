@@ -77,6 +77,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/clear.c \
 														./src/server/clear.h \
 														./src/server/howmanyProcess.c \
-														./src/server/howmanyProcess.h
+														./src/server/howmanyProcess.h \
+														./src/server/matchDomain.c \
+														./src/server/matchDomain.h
 
 CnetworkingServer_LDADD = $(PCRE_LIBS)
