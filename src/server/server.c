@@ -4,9 +4,6 @@ int
 main (int argc, char *argv[])
 {
   int *s, *sClient;
-  char *buffer;
-  bool run;
-  struct state state;
   struct sockaddr_in servAddr;
   struct fruit *fruits;
   servAddr.sin_family = AF_INET;
@@ -20,15 +17,9 @@ main (int argc, char *argv[])
 
   sClient = malloc (sizeof (int));
   *sClient = acceptClientConnetion (s);
-  buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
-  run = true;
-  state.helo = false;
 
-  while (run)
-  {
-    mainProcess (&state, sClient, buffer, &run, fruits);
-  }
-  free (buffer);
+  mainProcess (sClient, fruits);
+
   clearFruits (fruits);
   close (*sClient);
   free (sClient);

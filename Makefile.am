@@ -83,4 +83,4 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/mainProcess.c \
 														./src/server/mainProcess.h
 
-CnetworkingServer_LDADD = $(PCRE_LIBS)
+CnetworkingServer_LDADD = $(PCRE_LIBS) $(PTHREAD_LIBS)

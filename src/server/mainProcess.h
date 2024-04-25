@@ -18,7 +18,6 @@
 #include <string.h>
 #include <unistd.h>
 
-void mainProcess (struct state *state, int *sClient, char *buffer, bool *run,
-                  struct fruit *fruits);
+void mainProcess (int *sClient, struct fruit *fruits);
 
 #endif /* end of include guard: MAINPROCESS_H */
