@@ -1,0 +1,90 @@
+---
+- scope:
+    name: server
+    tests:
+      - test:
+          name: helo
+          start: no_helo
+          in: helo helo.fr
+          out: HELO OK
+      - test:
+          name: helo after helo
+          start: helo
+          in: helo helo.fr
+          out: HELO NOK 90
+      - test:
+          name: helo not valid fqdn
+          start: helo
+          in: helo helo.fr
+          out: HELO NOK 90
+      - test:
+          name: send fruit command not valid
+          start: helo
+          in: sendfruit
+          out: "00"
+      - test:
+          name: send 1 peach
+          start: helo
+          in: sendfruit peach 1
+          out: "sendfruit OK"
+      - test:
+          name: send 1 peach not helo
+          start: no_helo
+          in: sendfruit peach 1
+          out: "HELO NOK 90"
+      - test:
+          name: send fruit not available
+          start: helo
+          in: sendfruit fruit 1
+          out: "sendfruit NOK 69"
+      - test:
+          name: send too much fruits
+          start: helo
+          in: sendfruit peach 100
+          out: "sendfruit NOK 51"
+      - test:
+          name: change fruit
+          start: helo
+          in: chngfruit peach banana
+          out: "chngfruit OK banana"
+      - test:
+          name: change fruit not new name
+          start: helo
+          in: chngfruit peach
+          out: "00"
+      - test:
+          name: change fruit not available
+          start: helo
+          in: chngfruit banana peach
+          out: "chngfruit NOK 69"
+      - test:
+          name: howmany not more
+          start: helo
+          in: howmany peach
+          out: "howmany NOK 21"
+      - test:
+          name: howmany peach
+          start: sendfruit
+          in: howmany peach
+          out: "howmany OK 19"
+      - test:
+          name: howmany not fruits available
+          start: sendfruit
+          in: howmany banana
+          out: "howmany NOK 69"
+- scope:
+    name: server_enable_erase
+    tests:
+      - test:
+          name: recvFruit enable erase
+          start: sendfruit 
+          in: recvfruit peach
+          out: recvfruit OK 19
+- scope:
+    name: server_disable_erase
+    tests:
+      - test:
+          name: recvFruit disable erase
+          start: sendfruit 
+          in: recvfruit peach 5
+          out: recvfruit OK 5
